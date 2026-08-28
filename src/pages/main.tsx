@@ -7,7 +7,9 @@ export const MainScreen = () => {
   return (
     <View style={styles.container}>
       <SessionSummary />
-      <Button onPress={() => null}>Начать сессию</Button>
+      <Button style={styles.startButton} onPress={() => null}>
+        Начать сессию
+      </Button>
     </View>
   );
 };
@@ -15,5 +17,8 @@ export const MainScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  startButton: {
+    alignSelf: 'center',
   },
 });
