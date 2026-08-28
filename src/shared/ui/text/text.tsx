@@ -1,14 +1,13 @@
-import { StyleSheet, Text as RNText, TextProps } from 'react-native';
 import { FC } from 'react';
+import { Text as RNText } from 'react-native';
 
-export const Text: FC<TextProps> = ({ children, style }) => {
-  return <RNText style={[styles.text, style]}>{children}</RNText>;
+import { ITextProps } from './text.interfaces';
+import { styles } from './text.styles';
+
+export const Text: FC<ITextProps> = ({ children, style, variant = 'bodyM', ...props }) => {
+  return (
+    <RNText {...props} style={[styles.text, styles[variant], style]}>
+      {children}
+    </RNText>
+  );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    color: 'red',
-    fontSize: 32,
-    fontWeight: '700',
-  },
-});
