@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   button: {
-    minHeight: 44,
+    minHeight: 30,
     paddingHorizontal: 24,
-    paddingVertical: 8,
+    paddingVertical: 3,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
