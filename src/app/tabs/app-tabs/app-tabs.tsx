@@ -1,7 +1,7 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { useThemeColors } from '@/shared/theme';
 
-export const AppTabs = () => {
+export default function AppTabs() {
   const colors = useThemeColors();
 
   return (
@@ -21,4 +21,4 @@ export const AppTabs = () => {
       </NativeTabs.Trigger>
     </NativeTabs>
   );
-};
+}

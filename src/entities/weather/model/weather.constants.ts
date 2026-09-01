@@ -1,0 +1,2 @@
+export const WEATHER_STALE_TIME = 15 * 60 * 1000;
+export const WEATHER_FORECAST_OFFSET = 60 * 60 * 1000;
