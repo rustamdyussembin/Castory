@@ -1,4 +1,4 @@
-import { IWeatherApiSnapshot, IWeatherSnapshot } from './weather.types';
+import { IWeatherApiSnapshot, IWeatherSnapshot } from '../weather.types';
 
 export const toWeatherSnapshot = (snapshot: IWeatherApiSnapshot): IWeatherSnapshot => ({
   temperature: snapshot.temperature_2m,

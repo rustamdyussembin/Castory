@@ -15,7 +15,7 @@ export interface IWeatherHourlyData {
   wind_gusts_10m: number[];
 }
 
-export interface IMapWeather {
+export interface IMapWeatherResponse {
   hourly: IWeatherHourlyData;
 }
 

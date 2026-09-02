@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, queryOptions } from '@tanstack/react-query';
 
 import type { IUseWeather } from '../weather.types';
 
 import { getCurrentCoordinates } from '@/shared/lib/location';
-import { queryOptions } from '@tanstack/react-query';
 import { getWeather } from '../api/get-weather';
 import { WEATHER_STALE_TIME } from '../weather.constants';
 

@@ -4,7 +4,7 @@ import { roundToString } from '@/shared/lib/formatters';
 import { Text } from '@/shared/ui';
 
 import { useWeather } from '../model/use-weather';
-import { getWindDirection } from '../weather.helpers';
+import { getWindDirection } from '../lib/weather.helpers';
 
 export const WeatherSummary = () => {
   const { weather, isLoading } = useWeather();

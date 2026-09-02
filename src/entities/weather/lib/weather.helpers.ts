@@ -1,10 +1,21 @@
 import { isNumberArray, isRecord, isStringArray } from '@/shared/lib/type-guard';
 
-import { IMapWeather, IWeather, IWeatherApiSnapshot, IWeatherHourlyData, WindDirection } from './weather.types';
-import { FULL_CIRCLE_DEGREES, WEATHER_API_FIELDS, WEATHER_FORECAST_OFFSET, WIND_DIRECTIONS } from './weather.constants';
+import {
+  IMapWeatherResponse,
+  IWeather,
+  IWeatherApiSnapshot,
+  IWeatherHourlyData,
+  WindDirection,
+} from '../weather.types';
+import {
+  FULL_CIRCLE_DEGREES,
+  WEATHER_API_FIELDS,
+  WEATHER_FORECAST_OFFSET,
+  WIND_DIRECTIONS,
+} from '../weather.constants';
 import { toWeatherSnapshot } from './weather.translators';
 
-const isWeatherApiSnapshot = (value: unknown): value is IMapWeather =>
+const isWeatherApiSnapshot = (value: unknown): value is IWeatherApiSnapshot =>
   isRecord(value) && WEATHER_API_FIELDS.every((field) => typeof value[field] === 'number');
 
 export const getHourlySnapshot = (hourly: IWeatherHourlyData, index: number): IWeatherApiSnapshot => {
@@ -64,7 +75,7 @@ export const mapWeather = (value: unknown): IWeather => {
   };
 };
 
-const parseWeather = (value: unknown): IMapWeather => {
+const parseWeather = (value: unknown): IMapWeatherResponse => {
   if (!isRecord(value) || !isRecord(value.hourly)) {
     throw new Error('Open-Meteo returned an invalid response');
   }
