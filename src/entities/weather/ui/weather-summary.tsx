@@ -1,19 +1,19 @@
 import { StyleSheet, View } from 'react-native';
 
+import { roundToString } from '@/shared/lib/formatters';
 import { Text } from '@/shared/ui';
 
-import { getWindDirection } from '../lib/get-wind-direction';
 import { useWeather } from '../model/use-weather';
-import { roundToString } from '@/shared/lib/formatters';
+import { getWindDirection } from '../weather.helpers';
 
 export const WeatherSummary = () => {
-  const { weather, isLoading, error } = useWeather();
+  const { weather, isLoading } = useWeather();
 
   if (isLoading) {
     return <Text variant="bodyS">Загрузка погоды...</Text>;
   }
 
-  if (!weather || error) {
+  if (!weather) {
     return <Text variant="bodyS">Погода недоступна</Text>;
   }
 
