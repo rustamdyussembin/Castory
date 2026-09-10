@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { AppState, type AppStateStatus, Platform, useColorScheme } from 'react-native';
 
+import { I18nProvider } from '@/app/providers/i18n';
 import AppTabs from '@/app/tabs/app-tabs/app-tabs';
 
 SplashScreen.preventAutoHideAsync();
@@ -30,10 +31,12 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <AppTabs />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <I18nProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <AppTabs />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </I18nProvider>
   );
 }

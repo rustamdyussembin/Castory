@@ -1,7 +1,10 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
+import { useTranslation } from 'react-i18next';
+
 import { useThemeColors } from '@/shared/theme';
 
 export default function AppTabs() {
+  const { t } = useTranslation();
   const colors = useThemeColors();
 
   return (
@@ -11,12 +14,12 @@ export default function AppTabs() {
       labelStyle={{ selected: { color: colors.text } }}
     >
       <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Сессия</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>{t('navigation.session')}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon src={require('@/assets/images/tabIcons/home.png')} renderingMode="template" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="explore">
-        <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>{t('navigation.explore')}</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon src={require('@/assets/images/tabIcons/explore.png')} renderingMode="template" />
       </NativeTabs.Trigger>
     </NativeTabs>

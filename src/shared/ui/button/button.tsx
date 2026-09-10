@@ -1,9 +1,10 @@
 import { Pressable } from 'react-native';
 
+import { useThemeColors } from '@/shared/theme';
+
 import { Text } from '../text';
 import { IButtonProps } from './button.interfaces';
 import { styles } from './button.styles';
-import { useThemeColors } from '@/shared/theme';
 
 export const Button = ({
   accessibilityRole,
@@ -13,10 +14,13 @@ export const Button = ({
   hitSlop = 4,
   style,
   textStyle,
+  variant = 'primary',
   ...props
 }: IButtonProps) => {
   const colors = useThemeColors();
   const isDisabled = disabled ?? false;
+  const backgroundColor = variant === 'primary' ? colors.primary : colors.secondary;
+  const textColor = variant === 'primary' ? colors.onPrimary : colors.onSecondary;
 
   return (
     <Pressable
@@ -27,13 +31,13 @@ export const Button = ({
       hitSlop={hitSlop}
       style={(state) => [
         styles.button,
-        { backgroundColor: colors.accent },
+        { backgroundColor },
         state.pressed && styles.pressed,
         isDisabled && styles.disabled,
         typeof style === 'function' ? style(state) : style,
       ]}
     >
-      <Text style={[styles.text, { color: colors.onAccent }, textStyle]}>{children}</Text>
+      <Text style={[styles.text, { color: textColor }, textStyle]}>{children}</Text>
     </Pressable>
   );
 };
