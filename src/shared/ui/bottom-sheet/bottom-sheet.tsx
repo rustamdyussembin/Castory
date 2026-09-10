@@ -1,0 +1,39 @@
+import NativeBottomSheet, { BottomSheetView } from '@expo/ui/community/bottom-sheet';
+import { useCallback } from 'react';
+import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { spacing } from '@/shared/theme';
+
+import { Text } from '../text';
+import type { IBottomSheetProps } from './bottom-sheet.interfaces';
+import { styles } from './bottom-sheet.styles';
+
+export const BottomSheet = ({ children, dismissible = true, onClose, open, snapPoints, title }: IBottomSheetProps) => {
+  const insets = useSafeAreaInsets();
+
+  const handleClose = useCallback(() => {
+    if (dismissible && open) onClose();
+  }, [dismissible, onClose, open]);
+
+  return (
+    <NativeBottomSheet
+      backgroundStyle={styles.background}
+      enablePanDownToClose={dismissible}
+      index={open ? 0 : -1}
+      onClose={handleClose}
+      snapPoints={snapPoints}
+    >
+      <BottomSheetView>
+        <View accessibilityViewIsModal style={[styles.content, { paddingBottom: Math.max(insets.bottom, spacing[4]) }]}>
+          {title ? (
+            <Text accessibilityRole="header" style={styles.title}>
+              {title}
+            </Text>
+          ) : null}
+          {children}
+        </View>
+      </BottomSheetView>
+    </NativeBottomSheet>
+  );
+};
