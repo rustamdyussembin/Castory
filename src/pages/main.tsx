@@ -1,15 +1,17 @@
 import { StyleSheet, View } from 'react-native';
 
+import { StartSessionSummary, useStartSessionStore } from '@/features/start-session';
 import { Button } from '@/shared/ui';
 import { SessionSummary } from '@/widgets/session-summary';
-import { StartSessionSummary } from '@/features/start-session';
 
 export const MainScreen = () => {
+  const openStartSessionSheet = useStartSessionStore((state) => state.openSheet);
+
   return (
     <View style={styles.container}>
       <SessionSummary />
       <View style={styles.startButtonContainer}>
-        <Button onPress={() => null}>Начать сессию</Button>
+        <Button onPress={openStartSessionSheet}>Начать сессию</Button>
       </View>
 
       <StartSessionSummary />
