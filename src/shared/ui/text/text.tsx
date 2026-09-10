@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Text as RNText } from 'react-native';
 
-import { ITextProps } from './text.interfaces';
+import { ITextProps } from './text.types';
 import { styles } from './text.styles';
 
 export const Text: FC<ITextProps> = ({ children, style, variant = 'bodyM', ...props }) => {

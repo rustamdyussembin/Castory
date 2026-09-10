@@ -1,7 +1,7 @@
 import { Modal as ReactNativeModal, Pressable, View } from 'react-native';
 
 import { Text } from '../text';
-import type { IModalProps } from './modal.interfaces';
+import type { IModalProps } from './modal.types';
 import { styles } from './modal.styles';
 
 export const Modal = ({ children, onClose, title, visible }: IModalProps) => (

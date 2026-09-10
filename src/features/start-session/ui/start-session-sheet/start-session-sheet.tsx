@@ -1,20 +1,19 @@
-import { StyleSheet } from 'react-native';
-
 import { BottomSheet } from '@/shared/ui';
+import { StartSessionForm } from '../start-session-form/start-session-form';
+import { useState } from 'react';
+import { IStartSession } from '../../start-session.types';
 
-export const StartSessionSummary = () => {
+export const StartSessionSheet = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState<IStartSession | null>(null);
+
+  const handleClose = () => setIsOpen(false);
+
+  const handleSubmit = (data: IStartSession) => setData(data);
+
   return (
-    <BottomSheet open onClose={() => null}>
-      qwe
+    <BottomSheet open={isOpen} onClose={handleClose}>
+      <StartSessionForm onCancel={handleClose} onSubmit={handleSubmit} />
     </BottomSheet>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: 4,
-  },
-});

@@ -4,7 +4,7 @@ import { TextInput as RNTextInput, View } from 'react-native';
 import { colors } from '@/shared/theme';
 
 import { Text } from '../text';
-import type { ITextInputProps } from './text-input.interfaces';
+import type { ITextInputProps } from './text-input.types';
 import { styles } from './text-input.styles';
 
 export const TextInput = forwardRef<RNTextInput, ITextInputProps>(

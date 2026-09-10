@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { spacing } from '@/shared/theme';
 
 import { Text } from '../text';
-import type { IBottomSheetProps } from './bottom-sheet.interfaces';
+import type { IBottomSheetProps } from './bottom-sheet.types';
 import { styles } from './bottom-sheet.styles';
 
 export const BottomSheet = ({ children, dismissible = true, onClose, open, snapPoints, title }: IBottomSheetProps) => {

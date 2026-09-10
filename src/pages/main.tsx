@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { Button } from '@/shared/ui';
 import { SessionSummary } from '@/widgets/session-summary';
+import { StartSessionSummary } from '@/features/start-session';
 
 export const MainScreen = () => {
   return (
@@ -10,6 +11,8 @@ export const MainScreen = () => {
       <View style={styles.startButtonContainer}>
         <Button onPress={() => null}>Начать сессию</Button>
       </View>
+
+      <StartSessionSummary />
     </View>
   );
 };
