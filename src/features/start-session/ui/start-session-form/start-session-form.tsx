@@ -13,7 +13,13 @@ import type { IStartSessionFormProps } from './start-session-form.types';
 export const StartSessionForm: FC<IStartSessionFormProps> = ({ onCancel, onSubmit }) => {
   const { t } = useTranslation();
   const schema = useMemo(() => createStartSessionFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<IStartSession>({ resolver: zodResolver(schema) });
+  const { control, handleSubmit } = useForm<IStartSession>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      sector: '',
+      venue: '',
+    },
+  });
 
   return (
     <View style={styles.container}>

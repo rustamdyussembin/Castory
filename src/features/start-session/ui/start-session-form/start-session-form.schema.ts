@@ -13,6 +13,5 @@ export const createStartSessionFormSchema = (t: TFunction) =>
     sector: z
       .string()
       .trim()
-      .min(1, t('session.form.validation.required'))
       .max(MAX_LENGTH, t('session.form.validation.maxLength', { count: MAX_LENGTH })),
   });
