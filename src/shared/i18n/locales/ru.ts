@@ -8,6 +8,9 @@ export const ru = {
     explore: 'Обзор',
     session: 'Сессия',
   },
+  rod: {
+    add: 'Добавить удилище',
+  },
   session: {
     duration: {
       hour: 'ч',
