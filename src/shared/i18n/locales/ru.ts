@@ -14,8 +14,8 @@ export const ru = {
       sector: 'Сектор',
       venue: 'Водоём',
       validation: {
-        sectorMaxLength: 'Не больше {{count}} символов',
-        venueRequired: 'Введите водоём',
+        maxLength: 'Не больше {{count}} символов',
+        required: 'Поле обязательно для заполнения',
       },
     },
   },

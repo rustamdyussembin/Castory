@@ -13,7 +13,7 @@ export const StartSessionSheet = () => {
   const startSession = useStartSessionStore((state) => state.startSession);
 
   return (
-    <BottomSheet open={isOpen} onClose={closeSheet} title={t('session.start')}>
+    <BottomSheet open={isOpen} onClose={closeSheet} title={t('session.start')} dismissible={false}>
       <StartSessionForm onCancel={closeSheet} onSubmit={startSession} />
     </BottomSheet>
   );

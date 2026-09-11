@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { StartSessionSummary, useStartSessionStore } from '@/features/start-session';
+import { StartSessionSheet, useStartSessionStore } from '@/features/start-session';
 import { Button } from '@/shared/ui';
 import { SessionSummary } from '@/widgets/session-summary';
 
@@ -16,7 +16,7 @@ export const MainScreen = () => {
         <Button onPress={openStartSessionSheet}>{t('session.start')}</Button>
       </View>
 
-      <StartSessionSummary />
+      <StartSessionSheet />
     </View>
   );
 };
