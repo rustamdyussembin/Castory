@@ -13,5 +13,9 @@ export const createStartSessionFormSchema = (t: TFunction) =>
     sector: z
       .string()
       .trim()
-      .max(MAX_LENGTH, t('session.form.validation.maxLength', { count: MAX_LENGTH })),
+      .max(MAX_LENGTH, t('session.form.validation.maxLength', { count: MAX_LENGTH }))
+      .optional()
+      .transform((sector) => sector || undefined),
   });
+
+export type StartSessionFormInput = z.input<ReturnType<typeof createStartSessionFormSchema>>;

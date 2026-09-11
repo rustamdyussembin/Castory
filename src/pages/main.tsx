@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { StartSessionSheet, useStartSessionStore } from '@/features/start-session';
 import { Button } from '@/shared/ui';
-import { SessionSummary } from '@/widgets/session-summary';
+import { SessionHeader } from '@/widgets/session-header';
 
 export const MainScreen = () => {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ export const MainScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SessionSummary />
+      <SessionHeader />
       <View style={styles.startButtonContainer}>
         <Button onPress={openStartSessionSheet}>{t('session.start')}</Button>
       </View>

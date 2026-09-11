@@ -6,14 +6,15 @@ import { StyleSheet, View } from 'react-native';
 
 import { Button, TextInput } from '@/shared/ui';
 
-import type { IStartSession } from '../../start-session.types';
-import { createStartSessionFormSchema } from './start-session-form.schema';
+import type { StartSessionData } from '@/entities/session';
+
+import { createStartSessionFormSchema, type StartSessionFormInput } from './start-session-form.schema';
 import type { IStartSessionFormProps } from './start-session-form.types';
 
 export const StartSessionForm: FC<IStartSessionFormProps> = ({ onCancel, onSubmit }) => {
   const { t } = useTranslation();
   const schema = useMemo(() => createStartSessionFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<IStartSession>({
+  const { control, handleSubmit } = useForm<StartSessionFormInput, unknown, StartSessionData>({
     resolver: zodResolver(schema),
     defaultValues: {
       sector: '',
@@ -29,7 +30,7 @@ export const StartSessionForm: FC<IStartSessionFormProps> = ({ onCancel, onSubmi
         render={({ field, fieldState }) => (
           <TextInput
             ref={field.ref}
-            value={field.value}
+            value={field.value ?? ''}
             onChangeText={field.onChange}
             onBlur={field.onBlur}
             placeholder={t('session.form.venue')}

@@ -9,6 +9,12 @@ export const ru = {
     session: 'Сессия',
   },
   session: {
+    duration: {
+      hour: 'ч',
+      minute: 'м',
+    },
+    runningFor: 'Сессия идет {{duration}}',
+    sectorValue: 'Сектор {{sector}}',
     start: 'Начать сессию',
     form: {
       sector: 'Сектор',

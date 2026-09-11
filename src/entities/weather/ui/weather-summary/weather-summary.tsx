@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { roundToString } from '@/shared/lib/formatters';
 import { Text } from '@/shared/ui';
 
-import { getWindDirection } from '../lib/weather.helpers';
-import { useWeather } from '../model/use-weather';
-import { WIND_DIRECTION_ARROWS } from '../weather.constants';
+import { getWindDirection } from '../../lib/weather.helpers';
+import { useWeather } from '../../model/use-weather';
+import { WIND_DIRECTION_ARROWS } from '../../weather.constants';
 
 export const WeatherSummary = () => {
   const { t } = useTranslation();
