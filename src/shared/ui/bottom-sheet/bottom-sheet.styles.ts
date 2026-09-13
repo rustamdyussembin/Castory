@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-import { colors, spacing } from '@/shared/theme';
+import { spacing } from '@/shared/theme';
 
 export const styles = StyleSheet.create({
   background: {
-    backgroundColor: colors.background,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },

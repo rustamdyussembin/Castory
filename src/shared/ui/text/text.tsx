@@ -1,13 +1,18 @@
-import { FC } from 'react';
-import { Text as RNText } from 'react-native';
+import type { FC } from 'react';
+import { Text as PaperText } from 'react-native-paper';
 
-import { ITextProps } from './text.types';
-import { styles } from './text.styles';
+import type { ITextProps, TextVariant } from './text.types';
+
+const paperVariants: Record<TextVariant, 'bodyLarge' | 'bodyMedium' | 'bodySmall'> = {
+  bodyM: 'bodyLarge',
+  bodyS: 'bodyMedium',
+  bodyXS: 'bodySmall',
+};
 
 export const Text: FC<ITextProps> = ({ children, style, variant = 'bodyM', ...props }) => {
   return (
-    <RNText {...props} style={[styles.text, styles[variant], style]}>
+    <PaperText {...props} style={style} variant={paperVariants[variant]}>
       {children}
-    </RNText>
+    </PaperText>
   );
 };

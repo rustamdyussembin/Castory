@@ -1,33 +1,34 @@
-import { forwardRef } from 'react';
-import { TextInput as RNTextInput, View } from 'react-native';
+import { type ComponentRef, forwardRef } from 'react';
+import { TextInput as NativeTextInput, View } from 'react-native';
+import { HelperText, TextInput as PaperTextInput } from 'react-native-paper';
 
-import { colors } from '@/shared/theme';
-
-import { Text } from '../text';
 import type { ITextInputProps } from './text-input.types';
 import { styles } from './text-input.styles';
 
-export const TextInput = forwardRef<RNTextInput, ITextInputProps>(
-  ({ accessibilityHint, error, multiline, placeholderTextColor = colors.textSecondary, style, ...props }, ref) => {
+type TextInputRef = ComponentRef<typeof NativeTextInput> & ComponentRef<typeof PaperTextInput>;
+
+export const TextInput = forwardRef<TextInputRef, ITextInputProps>(
+  ({ accessibilityHint, error, multiline, style, ...props }, ref) => {
     const errorMessage = error?.trim();
     const hasError = Boolean(errorMessage);
     const inputAccessibilityHint = [accessibilityHint, errorMessage].filter(Boolean).join('. ') || undefined;
 
     return (
       <View style={styles.container}>
-        <RNTextInput
+        <PaperTextInput
           {...props}
           ref={ref}
           accessibilityHint={inputAccessibilityHint}
-          aria-invalid={hasError}
+          dense
+          error={hasError}
+          mode="outlined"
           multiline={multiline}
-          placeholderTextColor={placeholderTextColor}
-          style={[styles.input, multiline && styles.inputMultiline, hasError && styles.inputError, style]}
+          style={[multiline && styles.inputMultiline, style]}
         />
         {hasError ? (
-          <Text accessibilityLiveRegion="polite" accessibilityRole="alert" style={styles.error} variant="bodyXS">
+          <HelperText accessibilityLiveRegion="polite" padding="none" type="error" visible>
             {errorMessage}
-          </Text>
+          </HelperText>
         ) : null}
       </View>
     );

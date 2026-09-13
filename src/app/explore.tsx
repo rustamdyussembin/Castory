@@ -1,5 +1,7 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+
+import { Text } from '@/shared/ui';
 
 export default function ExploreScreen() {
   const { t } = useTranslation();
