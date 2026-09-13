@@ -16,6 +16,7 @@ export const ru = {
       hour: 'ч',
       minute: 'м',
     },
+    finish: 'Завершить сессию',
     runningFor: 'Сессия идет {{duration}}',
     sectorValue: 'Сектор {{sector}}',
     start: 'Начать сессию',
