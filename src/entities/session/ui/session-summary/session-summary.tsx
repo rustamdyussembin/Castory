@@ -42,7 +42,7 @@ export const SessionSummary = () => {
         <Text variant="bodyS">{t('session.sectorValue', { sector: activeSession.sector })}</Text>
       ) : null}
       <Text variant="bodyS">{t('session.runningFor', { duration })}</Text>
-      <Button onPress={finishSession} variant="secondary">
+      <Button onPress={finishSession} mode="text">
         {t('session.finish')}
       </Button>
     </View>

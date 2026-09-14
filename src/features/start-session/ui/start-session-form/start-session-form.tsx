@@ -57,7 +57,7 @@ export const StartSessionForm: FC<IStartSessionFormProps> = ({ onCancel, onSubmi
       />
 
       <View style={styles.actions}>
-        <Button onPress={onCancel} variant="secondary">
+        <Button onPress={onCancel} mode="contained-tonal">
           {t('common.cancel')}
         </Button>
         <Button onPress={handleSubmit(onSubmit)}>{t('common.save')}</Button>
