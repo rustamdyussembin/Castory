@@ -52,7 +52,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "compile": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:check": "expo export"
   },
   "private": true
 }
