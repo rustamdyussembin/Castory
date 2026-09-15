@@ -1,13 +1,14 @@
 {
   "expo": {
-    "name": "dream-carp",
-    "slug": "dream-carp",
+    "name": "castory",
+    "slug": "castory",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "dreamcarp",
+    "scheme": "castory",
     "userInterfaceStyle": "automatic",
     "ios": {
+      "bundleIdentifier": "com.rustamdyussembin.castory",
       "icon": "./assets/expo.icon"
     },
     "android": {
