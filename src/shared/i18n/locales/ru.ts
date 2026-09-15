@@ -2,13 +2,29 @@ export const ru = {
   common: {
     cancel: 'Отмена',
     close: 'Закрыть',
+    delete: 'Удалить',
     edit: 'Изменить',
     noData: 'Нет данных',
     save: 'Сохранить',
   },
   navigation: {
     explore: 'Обзор',
+    preparation: 'Подготовка',
     session: 'Сессия',
+  },
+  preparation: {
+    addTask: 'Добавить',
+    completed: 'Выполнено',
+    empty: 'Задач пока нет',
+    markActive: 'Вернуть задачу «{{title}}» в активные',
+    markCompleted: 'Отметить задачу «{{title}}» выполненной',
+    taskActions: 'Действия с задачей «{{title}}»',
+    taskPlaceholder: 'Новая задача',
+    title: 'Подготовка к рыбалке',
+    validation: {
+      maxLength: 'Не больше {{count}} символов',
+      required: 'Введите название задачи',
+    },
   },
   fishBite: {
     title: 'Поклёвка',
