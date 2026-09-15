@@ -17,8 +17,9 @@ export const createAddRodFormSchema = (t: TFunction) =>
     wraps: z
       .string()
       .trim()
-      .refine((value) => !value || parseRodWraps(value) !== undefined, t('rod.form.validation.positiveNumber'))
-      .transform((value) => parseRodWraps(value)),
+      .min(1, t('rod.form.validation.required'))
+      .refine((value) => parseRodWraps(value) !== undefined, t('rod.form.validation.positiveNumber'))
+      .transform((value) => parseRodWraps(value) as number),
     pegDistance: z.enum(['3', '4', '5']).transform((value) => Number(value) as PegDistance),
   });
 

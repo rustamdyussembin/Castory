@@ -1,3 +1,5 @@
+import { calculateRodDistance as calculateDistance, type PegDistance } from '@/entities/rod';
+
 export const parseRodWraps = (value: string): number | undefined => {
   const normalizedValue = value.trim().replace(',', '.');
   if (!normalizedValue) return undefined;
@@ -8,9 +10,9 @@ export const parseRodWraps = (value: string): number | undefined => {
 
 export const calculateRodDistance = (wraps: string, pegDistance: string): number | undefined => {
   const parsedWraps = parseRodWraps(wraps);
-  const parsedPegDistance = Number(pegDistance);
+  const parsedPegDistance = Number(pegDistance) as PegDistance;
 
   if (parsedWraps === undefined || !Number.isFinite(parsedPegDistance)) return undefined;
 
-  return Number((parsedWraps * parsedPegDistance).toFixed(2));
+  return calculateDistance(parsedWraps, parsedPegDistance);
 };

@@ -15,16 +15,16 @@ import type { IAddRodFormProps } from './add-rod-form.types';
 
 const PEG_DISTANCES = ['3', '4', '5'] as const;
 
-export const AddRodForm: FC<IAddRodFormProps> = ({ onCancel, onSubmit }) => {
+export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSubmit }) => {
   const { t } = useTranslation();
   const [isDistanceMenuOpen, setIsDistanceMenuOpen] = useState(false);
   const schema = useMemo(() => createAddRodFormSchema(t), [t]);
   const { control, handleSubmit } = useForm<AddRodFormInput, unknown, AddRodData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      bait: '',
-      wraps: '',
-      pegDistance: '3',
+      bait: initialValues?.bait ?? '',
+      wraps: initialValues?.wraps === undefined ? '' : String(initialValues.wraps),
+      pegDistance: initialValues ? (String(initialValues.pegDistance) as (typeof PEG_DISTANCES)[number]) : '3',
     },
   });
   const [wraps, pegDistance] = useWatch({ control, name: ['wraps', 'pegDistance'] });
