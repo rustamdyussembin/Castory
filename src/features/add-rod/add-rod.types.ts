@@ -1,5 +1,6 @@
 export interface IAddRodState {
+  editingRodId: string | null;
   isSheetOpen: boolean;
-  openSheet: () => void;
+  openSheet: (rodId?: string) => void;
   closeSheet: () => void;
 }

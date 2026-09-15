@@ -1,4 +1,1 @@
-export interface FishBiteData {
-  fish: string;
-  weight: number;
-}
+export type { FishBiteData } from '@/entities/fishing-result';

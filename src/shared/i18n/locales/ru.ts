@@ -2,6 +2,7 @@ export const ru = {
   common: {
     cancel: 'Отмена',
     close: 'Закрыть',
+    edit: 'Изменить',
     save: 'Сохранить',
   },
   navigation: {
@@ -22,7 +23,18 @@ export const ru = {
   },
   rod: {
     add: 'Добавить удилище',
+    editTitle: 'Изменить удилище {{number}}',
     title: 'Удилище {{number}}',
+    card: {
+      bait: 'Насадка: {{bait}}',
+      distance: 'Дистанция {{distance}} метров ({{wraps}} оборотов на колышках)',
+      distanceUnavailable: 'Дистанция не указана',
+      inWater_one: 'В воде {{count}} минута',
+      inWater_few: 'В воде {{count}} минуты',
+      inWater_many: 'В воде {{count}} минут',
+      inWater_other: 'В воде {{count}} минуты',
+      recast: 'Перезабросил',
+    },
     form: {
       bait: 'Насадка',
       distance: 'Дистанция {{distance}} метров',

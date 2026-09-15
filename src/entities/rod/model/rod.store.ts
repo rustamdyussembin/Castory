@@ -20,10 +20,23 @@ export const useRodStore = create<RodState>()(
               {
                 ...data,
                 id: `${Date.now()}-${state.rods.length + 1}`,
+                castAt: Date.now(),
               },
             ],
           };
         });
+      },
+
+      updateRod: (id, data) => {
+        set((state) => ({
+          rods: state.rods.map((rod) => (rod.id === id ? { ...rod, ...data } : rod)),
+        }));
+      },
+
+      resetRodTimer: (id, castAt = Date.now()) => {
+        set((state) => ({
+          rods: state.rods.map((rod) => (rod.id === id ? { ...rod, castAt } : rod)),
+        }));
       },
 
       clearRods: () => {
@@ -34,6 +47,17 @@ export const useRodStore = create<RodState>()(
       name: 'session-rods',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: ({ rods }) => ({ rods }),
+      version: 1,
+      migrate: (persistedState, version) => {
+        if (version >= 1 || typeof persistedState !== 'object' || persistedState === null) return persistedState;
+
+        const state = persistedState as { rods?: Record<string, unknown>[] };
+
+        return {
+          ...state,
+          rods: state.rods?.map((rod) => ({ ...rod, castAt: rod.castAt ?? Date.now() })) ?? [],
+        };
+      },
     },
   ),
 );

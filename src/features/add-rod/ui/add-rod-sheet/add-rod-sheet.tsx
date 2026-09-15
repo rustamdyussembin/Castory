@@ -8,13 +8,20 @@ import { AddRodForm } from '../add-rod-form/add-rod-form';
 
 export const AddRodSheet = () => {
   const { t } = useTranslation();
+  const editingRodId = useAddRodStore((state) => state.editingRodId);
   const isOpen = useAddRodStore((state) => state.isSheetOpen);
   const closeSheet = useAddRodStore((state) => state.closeSheet);
-  const rodCount = useRodStore((state) => state.rods.length);
+  const rods = useRodStore((state) => state.rods);
   const addRod = useRodStore((state) => state.addRod);
+  const updateRod = useRodStore((state) => state.updateRod);
+  const editingRod = rods.find((rod) => rod.id === editingRodId);
 
   const handleSubmit = (data: Parameters<typeof addRod>[0]) => {
-    addRod(data);
+    if (editingRod) {
+      updateRod(editingRod.id, data);
+    } else {
+      addRod(data);
+    }
     closeSheet();
   };
 
@@ -22,10 +29,16 @@ export const AddRodSheet = () => {
     <BottomSheet
       open={isOpen}
       onClose={closeSheet}
-      title={t('rod.title', { number: rodCount + 1 })}
+      title={
+        editingRod
+          ? t('rod.editTitle', { number: rods.indexOf(editingRod) + 1 })
+          : t('rod.title', { number: rods.length + 1 })
+      }
       dismissible={false}
     >
-      <AddRodForm onCancel={closeSheet} onSubmit={handleSubmit} />
+      {isOpen ? (
+        <AddRodForm initialValues={editingRod} onCancel={closeSheet} onSubmit={handleSubmit} />
+      ) : null}
     </BottomSheet>
   );
 };

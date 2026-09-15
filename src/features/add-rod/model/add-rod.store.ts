@@ -3,13 +3,14 @@ import { create } from 'zustand';
 import type { IAddRodState } from '../add-rod.types';
 
 export const useAddRodStore = create<IAddRodState>()((set) => ({
+  editingRodId: null,
   isSheetOpen: false,
 
-  openSheet: () => {
-    set({ isSheetOpen: true });
+  openSheet: (rodId) => {
+    set({ editingRodId: rodId ?? null, isSheetOpen: true });
   },
 
   closeSheet: () => {
-    set({ isSheetOpen: false });
+    set({ editingRodId: null, isSheetOpen: false });
   },
 }));
