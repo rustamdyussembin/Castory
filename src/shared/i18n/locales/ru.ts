@@ -10,6 +10,19 @@ export const ru = {
   },
   rod: {
     add: 'Добавить удилище',
+    title: 'Удилище {{number}}',
+    form: {
+      bait: 'Насадка',
+      distance: 'Дистанция {{distance}} метров',
+      pegDistance: 'Расстояние между колышками',
+      pegDistanceValue: '{{distance}} м',
+      wraps: 'Оборотов на колышках',
+      validation: {
+        maxLength: 'Не больше {{count}} символов',
+        positiveNumber: 'Введите число больше 0',
+        required: 'Поле обязательно для заполнения',
+      },
+    },
   },
   session: {
     duration: {

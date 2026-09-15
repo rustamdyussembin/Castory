@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { AppState, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -7,13 +7,13 @@ import { Button, Text } from '@/shared/ui';
 
 import { formatSessionDuration } from '../../lib/format-session-duration';
 import { useSessionStore } from '../../model/session.store';
+import type { ISessionSummaryProps } from './session-summary.types';
 
 const UPDATE_INTERVAL_MS = 60_000;
 
-export const SessionSummary = () => {
+export const SessionSummary: FC<ISessionSummaryProps> = ({ onFinish }) => {
   const { t } = useTranslation();
   const activeSession = useSessionStore((state) => state.activeSession);
-  const finishSession = useSessionStore((state) => state.finishSession);
   const [now, setNow] = useState(Date.now);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export const SessionSummary = () => {
         <Text variant="bodyS">{t('session.sectorValue', { sector: activeSession.sector })}</Text>
       ) : null}
       <Text variant="bodyS">{t('session.runningFor', { duration })}</Text>
-      <Button onPress={finishSession} mode="text">
+      <Button onPress={onFinish} mode="text">
         {t('session.finish')}
       </Button>
     </View>
