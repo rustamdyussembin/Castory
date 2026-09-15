@@ -8,6 +8,18 @@ export const ru = {
     explore: 'Обзор',
     session: 'Сессия',
   },
+  fishBite: {
+    title: 'Поклёвка',
+    form: {
+      fish: 'Рыба',
+      weight: 'Вес, кг',
+      validation: {
+        maxLength: 'Не больше {{count}} символов',
+        positiveNumber: 'Введите число больше 0',
+        required: 'Поле обязательно для заполнения',
+      },
+    },
+  },
   rod: {
     add: 'Добавить удилище',
     title: 'Удилище {{number}}',
