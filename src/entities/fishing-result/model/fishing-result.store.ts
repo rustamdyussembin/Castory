@@ -28,6 +28,10 @@ export const useFishingResultStore = create<FishingResultState>()(
           },
         }));
       },
+
+      clearFishingResult: () => {
+        set({ fishingResult: null });
+      },
     }),
     {
       name: 'fishing-result',

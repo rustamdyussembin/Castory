@@ -30,4 +30,17 @@ export type AddFishBiteResultData = Omit<FishBiteResult, 'date' | 'id' | 'time'>
 export interface FishingResultState {
   fishingResult: FishingResult | null;
   addFishBiteResult: (data: AddFishBiteResultData) => void;
+  clearFishingResult: () => void;
+}
+
+export interface FishingResultsState {
+  sessions: FishingResult[];
+  addSession: (session: FishingResult) => void;
+}
+
+export interface FishingResultStats {
+  averageWeight: number | null;
+  bestBait: string | null;
+  fishCount: number;
+  maxWeight: number | null;
 }
