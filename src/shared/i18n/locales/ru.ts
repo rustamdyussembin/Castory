@@ -3,6 +3,7 @@ export const ru = {
     cancel: 'Отмена',
     close: 'Закрыть',
     edit: 'Изменить',
+    noData: 'Нет данных',
     save: 'Сохранить',
   },
   navigation: {
@@ -54,9 +55,24 @@ export const ru = {
       minute: 'м',
     },
     finish: 'Завершить сессию',
+    finishConfirmation: {
+      confirm: 'Завершить',
+      description: 'Результаты будут сохранены, а данные текущей сессии сброшены.',
+      title: 'Завершить сессию?',
+    },
     runningFor: 'Сессия идет {{duration}}',
     sectorValue: 'Сектор {{sector}}',
     start: 'Начать сессию',
+    summary: {
+      averageWeight: 'Средний вес: {{weight}}',
+      bestBait: 'Лучшая насадка: {{bait}}',
+      duration: 'Время на сессии: {{duration}}',
+      fishCount: 'Поймано рыб: {{count}}',
+      maxWeight: 'Самый большой вес: {{weight}}',
+      title: 'Итоги сессии',
+      venue: 'Водоём: {{venue}}',
+      weightValue: '{{weight}} кг',
+    },
     form: {
       sector: 'Сектор',
       venue: 'Водоём',
