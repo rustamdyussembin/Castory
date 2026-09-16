@@ -14,6 +14,8 @@ import { createAddRodFormSchema, type AddRodFormInput } from './add-rod-form.sch
 import type { IAddRodFormProps } from './add-rod-form.types';
 
 const PEG_DISTANCES = ['3', '4', '5'] as const;
+const MENU_ITEM_HEIGHT = 48;
+const DISTANCE_MENU_HEIGHT = PEG_DISTANCES.length * MENU_ITEM_HEIGHT + spacing[3] * 2;
 
 export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSubmit }) => {
   const { t } = useTranslation();
@@ -73,6 +75,8 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
           <Menu
             visible={isDistanceMenuOpen}
             onDismiss={() => setIsDistanceMenuOpen(false)}
+            anchorPosition="top"
+            style={styles.distanceMenu}
             anchor={
               <Pressable
                 accessibilityLabel={t('rod.form.pegDistance')}
@@ -84,7 +88,7 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
                     editable={false}
                     label={t('rod.form.pegDistance')}
                     value={t('rod.form.pegDistanceValue', { distance: field.value })}
-                    right={<PaperTextInput.Icon icon="menu-down" />}
+                    right={<PaperTextInput.Icon icon={isDistanceMenuOpen ? 'menu-up' : 'menu-down'} />}
                   />
                 </View>
               </Pressable>
@@ -128,5 +132,8 @@ const styles = StyleSheet.create({
   },
   action: {
     flex: 1,
+  },
+  distanceMenu: {
+    transform: [{ translateY: -DISTANCE_MENU_HEIGHT }],
   },
 });
