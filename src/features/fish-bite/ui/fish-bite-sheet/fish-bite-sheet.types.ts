@@ -1,9 +1,8 @@
 import type { SubmitHandler } from 'react-hook-form';
-
-import type { FishBiteData } from '../../fish-bite.types';
+import { IFishBiteData } from '@/shared/types';
 
 export interface IFishBiteSheetProps {
   open: boolean;
   onClose: () => void;
-  onSubmit: SubmitHandler<FishBiteData>;
+  onSubmit: SubmitHandler<IFishBiteData>;
 }

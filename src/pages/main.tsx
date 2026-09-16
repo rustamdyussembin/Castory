@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { type FishBiteData, useFishingResultStore } from '@/entities/fishing-result';
-import { calculateRodDistance, getTimeInWaterMinutes, MAX_RODS, RodCard, useRodStore } from '@/entities/rod';
+import { useFishingResultStore } from '@/entities/fishing-result';
+import { calculateRodDistance, getTimeInWaterMinutes, useRodStore } from '@/entities/rod';
 import { useSessionStore } from '@/entities/session';
-import { AddRodSheet, useAddRodStore } from '@/features/add-rod';
+import { AddRodSheet } from '@/features/add-rod';
 import { FishBiteSheet } from '@/features/fish-bite';
 import { StartSessionSheet, useStartSessionStore } from '@/features/start-session';
 import { spacing } from '@/shared/theme';
 import { Button } from '@/shared/ui';
 import { SessionHeader } from '@/widgets/session-header';
+import { RodCards } from '@/entities/rod/ui/rod-cards/rod-cards';
+import { IFishBiteData } from '@/shared/types';
 
 export const MainScreen = () => {
   const { t } = useTranslation();
@@ -20,12 +22,10 @@ export const MainScreen = () => {
   const resetRodTimer = useRodStore((state) => state.resetRodTimer);
   const addFishBiteResult = useFishingResultStore((state) => state.addFishBiteResult);
   const openStartSessionSheet = useStartSessionStore((state) => state.openSheet);
-  const openAddRodSheet = useAddRodStore((state) => state.openSheet);
   const hasActiveSession = activeSession !== null;
-  const hasReachedRodLimit = rods.length >= MAX_RODS;
   const biteRod = rods.find((rod) => rod.id === biteRodId);
 
-  const handleBiteSubmit = (data: FishBiteData) => {
+  const handleBiteSubmit = (data: IFishBiteData) => {
     if (!activeSession || !biteRod) return;
 
     const occurredAt = Date.now();
@@ -47,33 +47,12 @@ export const MainScreen = () => {
   return (
     <View style={styles.container}>
       <SessionHeader />
-      {!hasActiveSession ? (
+      {hasActiveSession && <RodCards setBiteRodId={setBiteRodId} />}
+      {!hasActiveSession && (
         <View style={styles.startButtonContainer}>
           <Button onPress={openStartSessionSheet}>{t('session.start')}</Button>
         </View>
-      ) : (
-        <ScrollView
-          style={styles.rodScroll}
-          contentContainerStyle={styles.rodList}
-          keyboardShouldPersistTaps="handled"
-        >
-          {rods.map((rod, index) => (
-            <RodCard
-              key={rod.id}
-              number={index + 1}
-              rod={rod}
-              onBite={() => setBiteRodId(rod.id)}
-              onEdit={() => openAddRodSheet(rod.id)}
-              onRecast={() => resetRodTimer(rod.id)}
-            />
-          ))}
-
-          <Button disabled={hasReachedRodLimit} onPress={() => openAddRodSheet()}>
-            {t('rod.add')}
-          </Button>
-        </ScrollView>
       )}
-
       <StartSessionSheet />
       <AddRodSheet />
       {biteRod ? <FishBiteSheet open onClose={() => setBiteRodId(null)} onSubmit={handleBiteSubmit} /> : null}

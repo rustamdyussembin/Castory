@@ -15,12 +15,13 @@ export default function AppTabs() {
     >
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>{t('navigation.session')}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon src={require('@/assets/images/tabIcons/home.png')} renderingMode="template" />
+
+        <NativeTabs.Trigger.Icon sf="water.waves" md="waves" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="preparation">
         <NativeTabs.Trigger.Label>{t('navigation.preparation')}</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="checklist" md="checklist" />
+        <NativeTabs.Trigger.Icon sf="list.bullet.clipboard" md="assignment" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );

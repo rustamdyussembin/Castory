@@ -1,15 +1,10 @@
-import type { FishingResult } from '../fishing-result.types';
 import { formatBiteDateTime } from './format-bite-date-time';
-
-interface CreateFishingResultData {
-  venue: string;
-  sector?: string;
-}
+import { ICreateFishingResultData, IFishingResult } from '@/shared/types';
 
 export const createFishingResult = (
-  { sector, venue }: CreateFishingResultData,
+  { sector, venue }: ICreateFishingResultData,
   timestamp = Date.now(),
-): FishingResult => ({
+): IFishingResult => ({
   venue,
   sector,
   date: formatBiteDateTime(timestamp).date,

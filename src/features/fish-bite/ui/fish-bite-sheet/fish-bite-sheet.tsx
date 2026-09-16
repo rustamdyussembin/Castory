@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 
 import { BottomSheet } from '@/shared/ui';
 
-import type { FishBiteData } from '../../fish-bite.types';
 import { FishBiteForm } from '../fish-bite-form/fish-bite-form';
 import type { IFishBiteSheetProps } from './fish-bite-sheet.types';
+import { IFishBiteData } from '@/shared/types';
 
 export const FishBiteSheet: FC<IFishBiteSheetProps> = ({ onClose, onSubmit, open }) => {
   const { t } = useTranslation();
-  const handleSubmit: SubmitHandler<FishBiteData> = (data) => {
+  const handleSubmit: SubmitHandler<IFishBiteData> = (data) => {
     onSubmit(data);
     onClose();
   };
