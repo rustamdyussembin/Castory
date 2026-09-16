@@ -1,6 +1,7 @@
 import NativeBottomSheet, { BottomSheetView } from '@expo/ui/community/bottom-sheet';
 import { useCallback } from 'react';
 import { View } from 'react-native';
+import { Portal } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { spacing, useThemeColors } from '@/shared/theme';
@@ -26,14 +27,19 @@ export const BottomSheet = ({ children, dismissible = true, onClose, open, snapP
       snapPoints={snapPoints}
     >
       <BottomSheetView>
-        <View accessibilityViewIsModal style={[styles.content, { paddingBottom: Math.max(insets.bottom, spacing[4]) }]}>
-          {title ? (
-            <Text accessibilityRole="header" style={styles.title}>
-              {title}
-            </Text>
-          ) : null}
-          {children}
-        </View>
+        <Portal.Host>
+          <View
+            accessibilityViewIsModal
+            style={[styles.content, { paddingBottom: Math.max(insets.bottom, spacing[4]) }]}
+          >
+            {title ? (
+              <Text accessibilityRole="header" style={styles.title}>
+                {title}
+              </Text>
+            ) : null}
+            {children}
+          </View>
+        </Portal.Host>
       </BottomSheetView>
     </NativeBottomSheet>
   );

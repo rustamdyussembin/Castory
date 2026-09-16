@@ -1,6 +1,6 @@
-import type { FishingResult, FishingResultStats } from '../fishing-result.types';
+import { IFishingResult, IFishingResultStats } from '@/shared/types';
 
-export const calculateFishingResultStats = ({ result }: FishingResult): FishingResultStats => {
+export const calculateFishingResultStats = ({ result }: IFishingResult): IFishingResultStats => {
   if (result.length === 0) {
     return {
       averageWeight: null,

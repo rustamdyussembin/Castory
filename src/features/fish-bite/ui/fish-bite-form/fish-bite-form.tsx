@@ -7,14 +7,14 @@ import { StyleSheet, View } from 'react-native';
 import { spacing } from '@/shared/theme';
 import { Button, TextInput } from '@/shared/ui';
 
-import type { FishBiteData } from '../../fish-bite.types';
 import { createFishBiteFormSchema, type FishBiteFormInput } from './fish-bite-form.schema';
 import type { IFishBiteFormProps } from './fish-bite-form.types';
+import { IFishBiteData } from '@/shared/types';
 
 export const FishBiteForm: FC<IFishBiteFormProps> = ({ onCancel, onSubmit }) => {
   const { t } = useTranslation();
   const schema = useMemo(() => createFishBiteFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<FishBiteFormInput, unknown, FishBiteData>({
+  const { control, handleSubmit } = useForm<FishBiteFormInput, unknown, IFishBiteData>({
     resolver: zodResolver(schema),
     defaultValues: {
       fish: '',
