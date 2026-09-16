@@ -39,6 +39,18 @@ export const useRodStore = create<RodState>()(
         }));
       },
 
+      reorderRods: (fromIndex, toIndex) => {
+        set((state) => {
+          if (fromIndex === toIndex || !state.rods[fromIndex] || !state.rods[toIndex]) return state;
+
+          const rods = [...state.rods];
+          const [movedRod] = rods.splice(fromIndex, 1);
+          rods.splice(toIndex, 0, movedRod);
+
+          return { rods };
+        });
+      },
+
       clearRods: () => {
         set({ rods: [] });
       },
