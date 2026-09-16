@@ -21,5 +21,6 @@ export interface RodState {
   addRod: (data: AddRodData) => void;
   updateRod: (id: string, data: RodFormData) => void;
   resetRodTimer: (id: string, castAt?: number) => void;
+  reorderRods: (fromIndex: number, toIndex: number) => void;
   clearRods: () => void;
 }

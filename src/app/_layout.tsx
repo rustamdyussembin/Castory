@@ -2,7 +2,8 @@ import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-
 import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { AppState, type AppStateStatus, Platform, useColorScheme } from 'react-native';
+import { AppState, type AppStateStatus, Platform, StyleSheet, useColorScheme } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 
 import { I18nProvider } from '@/app/providers/i18n';
@@ -32,14 +33,22 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <I18nProvider>
-      <QueryClientProvider client={queryClient}>
-        <PaperProvider>
-          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <AppTabs />
-          </ThemeProvider>
-        </PaperProvider>
-      </QueryClientProvider>
-    </I18nProvider>
+    <GestureHandlerRootView style={styles.root}>
+      <I18nProvider>
+        <QueryClientProvider client={queryClient}>
+          <PaperProvider>
+            <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+              <AppTabs />
+            </ThemeProvider>
+          </PaperProvider>
+        </QueryClientProvider>
+      </I18nProvider>
+    </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});

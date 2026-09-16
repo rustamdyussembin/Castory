@@ -51,6 +51,7 @@ export const ru = {
       inWater_many: 'В воде {{count}} минут',
       inWater_other: 'В воде {{count}} минуты',
       recast: 'Перезабросил',
+      reorder: 'Изменить порядок удилища {{number}}',
     },
     form: {
       bait: 'Насадка',

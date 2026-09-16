@@ -1,6 +1,7 @@
 import { type FC, useEffect, useState } from 'react';
 import { AppState, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { IconButton } from 'react-native-paper';
 
 import { spacing, useThemeColors } from '@/shared/theme';
 import { Button, Text } from '@/shared/ui';
@@ -11,7 +12,7 @@ import type { IRodCardProps } from './rod-card.types';
 
 const TIMER_UPDATE_INTERVAL_MS = 60_000;
 
-export const RodCard: FC<IRodCardProps> = ({ number, onBite, onEdit, onRecast, rod }) => {
+export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag, onEdit, onRecast, rod }) => {
   const { t } = useTranslation();
   const colors = useThemeColors();
   const [now, setNow] = useState(Date.now);
@@ -33,8 +34,25 @@ export const RodCard: FC<IRodCardProps> = ({ number, onBite, onEdit, onRecast, r
   const timeInWaterMinutes = getTimeInWaterMinutes(rod.castAt, now);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.backgroundElement }]}>
-      <Text>{t('rod.title', { number })}</Text>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: colors.backgroundElement },
+        isDragging && [styles.draggingContainer, { shadowColor: colors.text }],
+      ]}
+    >
+      <View style={styles.header}>
+        <Text>{t('rod.title', { number })}</Text>
+        <IconButton
+          accessibilityLabel={t('rod.card.reorder', { number })}
+          disabled={isDragging}
+          icon="drag-vertical"
+          iconColor={colors.textSecondary}
+          onPressIn={onDrag}
+          size={24}
+          style={styles.dragHandle}
+        />
+      </View>
       <Text variant="bodyS">{t('rod.card.bait', { bait: rod.bait })}</Text>
       <Text variant="bodyS">{t('rod.card.inWater', { count: timeInWaterMinutes })}</Text>
       <Text variant="bodyS">
@@ -64,6 +82,21 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     gap: spacing[1],
     padding: spacing[4],
+  },
+  draggingContainer: {
+    elevation: 6,
+    opacity: 0.95,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+  },
+  header: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  dragHandle: {
+    margin: 0,
   },
   primaryActions: {
     flexDirection: 'row',
