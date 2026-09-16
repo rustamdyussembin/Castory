@@ -8,8 +8,7 @@ import { Button, Text } from '@/shared/ui';
 import { formatSessionDuration } from '../../lib/format-session-duration';
 import { useSessionStore } from '../../model/session.store';
 import type { ISessionSummaryProps } from './session-summary.types';
-
-const UPDATE_INTERVAL_MS = 60_000;
+import { SESSION_SUMMARY_UPDATE_INTERVAL_MS } from '../../session.constants';
 
 export const SessionSummary: FC<ISessionSummaryProps> = ({ onFinish }) => {
   const { t } = useTranslation();
@@ -17,7 +16,7 @@ export const SessionSummary: FC<ISessionSummaryProps> = ({ onFinish }) => {
   const [now, setNow] = useState(Date.now);
 
   useEffect(() => {
-    const intervalId = setInterval(() => setNow(Date.now()), UPDATE_INTERVAL_MS);
+    const intervalId = setInterval(() => setNow(Date.now()), SESSION_SUMMARY_UPDATE_INTERVAL_MS);
     const subscription = AppState.addEventListener('change', (status) => {
       if (status === 'active') setNow(Date.now());
     });
@@ -55,5 +54,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: spacing[3],
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
