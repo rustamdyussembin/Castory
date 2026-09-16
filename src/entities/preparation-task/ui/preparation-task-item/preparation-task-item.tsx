@@ -29,17 +29,19 @@ export const PreparationTaskItem: FC<IPreparationTaskItemProps> = ({ onRemove, o
         task.isCompleted && styles.completedContainer,
       ]}
     >
-      <Checkbox.Item
-        label={task.title}
-        status={task.isCompleted ? 'checked' : 'unchecked'}
-        onPress={onToggle}
-        color={colors.primary}
-        uncheckedColor={colors.textSecondary}
-        accessibilityLabel={toggleAccessibilityLabel}
-        position="leading"
-        style={styles.checkboxItem}
-        labelStyle={task.isCompleted ? styles.completedTitle : undefined}
-      />
+      <View style={styles.checkboxContainer}>
+        <Checkbox.Item
+          label={task.title}
+          status={task.isCompleted ? 'checked' : 'unchecked'}
+          onPress={onToggle}
+          color={colors.primary}
+          uncheckedColor={colors.textSecondary}
+          accessibilityLabel={toggleAccessibilityLabel}
+          mode="android"
+          position="leading"
+          labelStyle={[styles.taskTitle, task.isCompleted && styles.completedTitle]}
+        />
+      </View>
       <Menu
         visible={isMenuOpen}
         onDismiss={() => setIsMenuOpen(false)}
@@ -48,6 +50,7 @@ export const PreparationTaskItem: FC<IPreparationTaskItemProps> = ({ onRemove, o
             icon="dots-vertical"
             onPress={() => setIsMenuOpen(true)}
             accessibilityLabel={t('preparation.taskActions', { title: task.title })}
+            style={styles.menuButton}
           />
         }
       >
@@ -73,10 +76,16 @@ const styles = StyleSheet.create({
   completedContainer: {
     opacity: 0.65,
   },
-  checkboxItem: {
+  checkboxContainer: {
     flex: 1,
   },
   completedTitle: {
     textDecorationLine: 'line-through',
+  },
+  menuButton: {
+    margin: 0,
+  },
+  taskTitle: {
+    textAlign: 'left',
   },
 });
