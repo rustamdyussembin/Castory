@@ -48,6 +48,7 @@ export const ru = {
       distanceUnavailable: 'Дистанция не указана',
       inWater_one: 'В воде {{count}} минута',
       inWater_few: 'В воде {{count}} минуты',
+      inWaterHours: 'В воде {{hours}}ч {{minutes}}м',
       inWater_many: 'В воде {{count}} минут',
       inWater_other: 'В воде {{count}} минуты',
       recast: 'Перезабросил',
@@ -58,9 +59,27 @@ export const ru = {
       distance: 'Дистанция {{distance}} метров',
       pegDistance: 'Расстояние между колышками',
       pegDistanceValue: '{{distance}} м',
-      wraps: 'Оборотов на колышках',
+      wraps: 'Оборотов на колышках (необязательно)',
       validation: {
         maxLength: 'Не больше {{count}} символов',
+        positiveNumber: 'Введите число больше 0',
+        required: 'Поле обязательно для заполнения',
+      },
+    },
+  },
+  spod: {
+    add: 'Добавить спод',
+    editTitle: 'Изменить спод {{number}}',
+    title: 'Спод {{number}}',
+    card: {
+      distance: 'Дистанция {{distance}} метров ({{wraps}} оборотов на колышках)',
+    },
+    form: {
+      distance: 'Дистанция {{distance}} метров',
+      pegDistance: 'Расстояние между колышками',
+      pegDistanceValue: '{{distance}} м',
+      wraps: 'Оборотов на колышках',
+      validation: {
         positiveNumber: 'Введите число больше 0',
         required: 'Поле обязательно для заполнения',
       },

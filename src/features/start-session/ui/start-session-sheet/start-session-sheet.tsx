@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useRodStore } from '@/entities/rod';
 import { useSessionStore } from '@/entities/session';
+import { useSpodStore } from '@/entities/spod';
 import { BottomSheet } from '@/shared/ui';
 
 import { useStartSessionStore } from '../../model/start-session';
@@ -14,9 +15,11 @@ export const StartSessionSheet = () => {
 
   const startSession = useSessionStore((state) => state.startSession);
   const clearRods = useRodStore((state) => state.clearRods);
+  const clearSpods = useSpodStore((state) => state.clearSpods);
 
   const handleSubmit = (data: Parameters<typeof startSession>[0]) => {
     clearRods();
+    clearSpods();
     startSession(data);
     closeSheet();
   };

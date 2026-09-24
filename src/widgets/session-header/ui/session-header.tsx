@@ -9,6 +9,7 @@ import {
 } from '@/entities/fishing-result';
 import { useRodStore } from '@/entities/rod';
 import { SessionFinishModal, SessionSummaryFinishModal, SessionSummary, useSessionStore } from '@/entities/session';
+import { useSpodStore } from '@/entities/spod';
 import { WeatherSummary } from '@/entities/weather';
 import { spacing } from '@/shared/theme';
 import { ICompletedSessionSummary } from '@/shared/types';
@@ -20,6 +21,7 @@ export const SessionHeader = () => {
   const activeSession = useSessionStore((state) => state.activeSession);
   const finishSession = useSessionStore((state) => state.finishSession);
   const clearRods = useRodStore((state) => state.clearRods);
+  const clearSpods = useSpodStore((state) => state.clearSpods);
   const fishingResult = useFishingResultStore((state) => state.fishingResult);
   const clearFishingResult = useFishingResultStore((state) => state.clearFishingResult);
   const addSession = useFishingResultsStore((state) => state.addSession);
@@ -46,6 +48,7 @@ export const SessionHeader = () => {
     setIsConfirmationOpen(false);
     finishSession();
     clearRods();
+    clearSpods();
     clearFishingResult();
   };
 

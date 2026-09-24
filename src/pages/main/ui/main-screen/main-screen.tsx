@@ -3,16 +3,16 @@ import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useFishingResultStore } from '@/entities/fishing-result';
-import { calculateRodDistance, getTimeInWaterMinutes, useRodStore } from '@/entities/rod';
+import { calculateRodDistance, getTimeInWaterMinutes, RodCards, useRodStore } from '@/entities/rod';
 import { useSessionStore } from '@/entities/session';
-import { AddRodSheet } from '@/features/add-rod';
+import { AddRodSheet, useAddRodStore } from '@/features/add-rod';
+import { AddSpodSheet } from '@/features/add-spod';
 import { FishBiteSheet } from '@/features/fish-bite';
 import { StartSessionSheet, useStartSessionStore } from '@/features/start-session';
-import { spacing } from '@/shared/theme';
+import { IFishBiteData } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import { SessionHeader } from '@/widgets/session-header';
-import { RodCards } from '@/entities/rod/ui/rod-cards/rod-cards';
-import { IFishBiteData } from '@/shared/types';
+import { SessionSpods } from '@/widgets/session-spods';
 
 export const MainScreen = () => {
   const { t } = useTranslation();
@@ -21,6 +21,7 @@ export const MainScreen = () => {
   const rods = useRodStore((state) => state.rods);
   const resetRodTimer = useRodStore((state) => state.resetRodTimer);
   const addFishBiteResult = useFishingResultStore((state) => state.addFishBiteResult);
+  const openAddRodSheet = useAddRodStore((state) => state.openSheet);
   const openStartSessionSheet = useStartSessionStore((state) => state.openSheet);
   const hasActiveSession = activeSession !== null;
   const biteRod = rods.find((rod) => rod.id === biteRodId);
@@ -47,7 +48,14 @@ export const MainScreen = () => {
   return (
     <View style={styles.container}>
       <SessionHeader />
-      {hasActiveSession && <RodCards setBiteRodId={setBiteRodId} />}
+      {hasActiveSession && (
+        <RodCards
+          footer={<SessionSpods />}
+          onAdd={() => openAddRodSheet()}
+          onBite={setBiteRodId}
+          onEdit={openAddRodSheet}
+        />
+      )}
       {!hasActiveSession && (
         <View style={styles.startButtonContainer}>
           <Button onPress={openStartSessionSheet}>{t('session.start')}</Button>
@@ -55,6 +63,7 @@ export const MainScreen = () => {
       )}
       <StartSessionSheet />
       <AddRodSheet />
+      <AddSpodSheet />
       {biteRod ? <FishBiteSheet open onClose={() => setBiteRodId(null)} onSubmit={handleBiteSubmit} /> : null}
     </View>
   );
@@ -68,13 +77,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  rodList: {
-    gap: spacing[4],
-    paddingBottom: spacing[6],
-    paddingTop: spacing[4],
-  },
-  rodScroll: {
-    flex: 1,
   },
 });

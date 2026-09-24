@@ -32,6 +32,13 @@ export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag,
   const wraps = rod.wraps;
   const distance = calculateRodDistance(wraps, rod.pegDistance);
   const timeInWaterMinutes = getTimeInWaterMinutes(rod.castAt, now);
+  const timeInWater =
+    timeInWaterMinutes >= 60
+      ? t('rod.card.inWaterHours', {
+          hours: Math.floor(timeInWaterMinutes / 60),
+          minutes: timeInWaterMinutes % 60,
+        })
+      : t('rod.card.inWater', { count: timeInWaterMinutes });
 
   return (
     <View
@@ -42,7 +49,9 @@ export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag,
       ]}
     >
       <View style={styles.header}>
-        <Text>{t('rod.title', { number })}</Text>
+        <View style={[styles.titleBadge, { backgroundColor: colors.primary }]}>
+          <Text style={[styles.title, { color: colors.onPrimary }]}>{t('rod.title', { number })}</Text>
+        </View>
         <IconButton
           accessibilityLabel={t('rod.card.reorder', { number })}
           disabled={isDragging}
@@ -54,7 +63,7 @@ export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag,
         />
       </View>
       <Text variant="bodyS">{t('rod.card.bait', { bait: rod.bait })}</Text>
-      <Text variant="bodyS">{t('rod.card.inWater', { count: timeInWaterMinutes })}</Text>
+      <Text variant="bodyS">{timeInWater}</Text>
       <Text variant="bodyS">
         {distance === undefined || wraps === undefined
           ? t('rod.card.distanceUnavailable')
@@ -97,6 +106,14 @@ const styles = StyleSheet.create({
   },
   dragHandle: {
     margin: 0,
+  },
+  titleBadge: {
+    borderRadius: 999,
+    paddingHorizontal: spacing[3],
+    paddingVertical: spacing[1],
+  },
+  title: {
+    fontWeight: '700',
   },
   primaryActions: {
     flexDirection: 'row',
