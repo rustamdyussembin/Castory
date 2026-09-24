@@ -1,4 +1,4 @@
-export type PegDistance = 3 | 4 | 5;
+import type { PegDistance } from '@/shared/lib/peg-distance';
 
 export interface Rod {
   id: string;

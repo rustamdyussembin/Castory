@@ -2,6 +2,7 @@ import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
 import type { PegDistance } from '@/entities/rod';
+import { PEG_DISTANCE_OPTIONS } from '@/shared/lib/peg-distance';
 
 import { parseRodWraps } from '../../lib/calculate-rod-distance';
 
@@ -17,9 +18,12 @@ export const createAddRodFormSchema = (t: TFunction) =>
     wraps: z
       .string()
       .trim()
-      .refine((value) => value.length === 0 || parseRodWraps(value) !== undefined, t('rod.form.validation.positiveNumber'))
+      .refine(
+        (value) => value.length === 0 || parseRodWraps(value) !== undefined,
+        t('rod.form.validation.positiveNumber'),
+      )
       .transform((value) => parseRodWraps(value)),
-    pegDistance: z.enum(['3', '4', '5']).transform((value) => Number(value) as PegDistance),
+    pegDistance: z.enum(PEG_DISTANCE_OPTIONS).transform((value) => Number(value) as PegDistance),
   });
 
 export type AddRodFormInput = z.input<ReturnType<typeof createAddRodFormSchema>>;

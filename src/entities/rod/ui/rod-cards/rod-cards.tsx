@@ -7,14 +7,12 @@ import type { Rod } from '@/entities/rod';
 import { Button } from '@/shared/ui';
 import { spacing } from '@/shared/theme';
 import { useTranslation } from 'react-i18next';
-import { useAddRodStore } from '@/features/add-rod';
 import { IRodCards } from './rod-cards.types';
 import { RodCard } from '../rod-card/rod-card';
 
-export const RodCards: FC<IRodCards> = ({ setBiteRodId }) => {
+export const RodCards: FC<IRodCards> = ({ footer, onAdd, onBite, onEdit }) => {
   const { t } = useTranslation();
   const rods = useRodStore((state) => state.rods);
-  const openAddRodSheet = useAddRodStore((state) => state.openSheet);
   const reorderRods = useRodStore((state) => state.reorderRods);
   const resetRodTimer = useRodStore((state) => state.resetRodTimer);
   const hasReachedRodLimit = rods.length >= MAX_RODS;
@@ -25,13 +23,13 @@ export const RodCards: FC<IRodCards> = ({ setBiteRodId }) => {
         isDragging={isActive}
         number={(getIndex() ?? rods.findIndex(({ id }) => id === rod.id)) + 1}
         rod={rod}
-        onBite={() => setBiteRodId(rod.id)}
+        onBite={() => onBite(rod.id)}
         onDrag={drag}
-        onEdit={() => openAddRodSheet(rod.id)}
+        onEdit={() => onEdit(rod.id)}
         onRecast={() => resetRodTimer(rod.id)}
       />
     ),
-    [openAddRodSheet, resetRodTimer, rods, setBiteRodId],
+    [onBite, onEdit, resetRodTimer, rods],
   );
 
   return (
@@ -44,9 +42,10 @@ export const RodCards: FC<IRodCards> = ({ setBiteRodId }) => {
       keyExtractor={(rod) => rod.id}
       ListFooterComponent={
         <View style={styles.footer}>
-          <Button disabled={hasReachedRodLimit} onPress={() => openAddRodSheet()}>
+          <Button disabled={hasReachedRodLimit} onPress={onAdd}>
             {t('rod.add')}
           </Button>
+          {footer}
         </View>
       }
       onDragEnd={({ from, to }) => reorderRods(from, to)}

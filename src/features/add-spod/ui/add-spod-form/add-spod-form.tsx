@@ -5,51 +5,34 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Menu, TextInput as PaperTextInput } from 'react-native-paper';
 
-import type { AddRodData } from '@/entities/rod';
+import type { SpodFormData } from '@/entities/spod';
 import { PEG_DISTANCE_OPTIONS } from '@/shared/lib/peg-distance';
 import { spacing } from '@/shared/theme';
 import { Button, Text, TextInput } from '@/shared/ui';
 
-import { calculateRodDistance } from '../../lib/calculate-rod-distance';
-import { createAddRodFormSchema, type AddRodFormInput } from './add-rod-form.schema';
-import type { IAddRodFormProps } from './add-rod-form.types';
+import { calculateSpodFormDistance } from '../../lib/calculate-spod-form-distance';
+import { createAddSpodFormSchema, type AddSpodFormInput } from './add-spod-form.schema';
+import type { IAddSpodFormProps } from './add-spod-form.types';
 
 const MENU_ITEM_HEIGHT = 48;
 const DISTANCE_MENU_HEIGHT = PEG_DISTANCE_OPTIONS.length * MENU_ITEM_HEIGHT + spacing[3] * 2;
 
-export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSubmit }) => {
+export const AddSpodForm: FC<IAddSpodFormProps> = ({ initialValues, onCancel, onSubmit }) => {
   const { t } = useTranslation();
   const [isDistanceMenuOpen, setIsDistanceMenuOpen] = useState(false);
-  const schema = useMemo(() => createAddRodFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<AddRodFormInput, unknown, AddRodData>({
+  const schema = useMemo(() => createAddSpodFormSchema(t), [t]);
+  const { control, handleSubmit } = useForm<AddSpodFormInput, unknown, SpodFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      bait: initialValues?.bait ?? '',
-      wraps: initialValues?.wraps === undefined ? '' : String(initialValues.wraps),
+      wraps: initialValues ? String(initialValues.wraps) : '',
       pegDistance: initialValues ? (String(initialValues.pegDistance) as (typeof PEG_DISTANCE_OPTIONS)[number]) : '3',
     },
   });
   const [wraps, pegDistance] = useWatch({ control, name: ['wraps', 'pegDistance'] });
-  const distance = calculateRodDistance(wraps, pegDistance);
+  const distance = calculateSpodFormDistance(wraps, pegDistance);
 
   return (
     <View style={styles.container}>
-      <Controller
-        control={control}
-        name="bait"
-        render={({ field, fieldState }) => (
-          <TextInput
-            ref={field.ref}
-            value={field.value}
-            onChangeText={field.onChange}
-            onBlur={field.onBlur}
-            placeholder={t('rod.form.bait')}
-            error={fieldState.error?.message}
-            returnKeyType="next"
-          />
-        )}
-      />
-
       <Controller
         control={control}
         name="wraps"
@@ -59,7 +42,7 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
             value={field.value}
             onChangeText={field.onChange}
             onBlur={field.onBlur}
-            placeholder={t('rod.form.wraps')}
+            placeholder={t('spod.form.wraps')}
             error={fieldState.error?.message}
             inputMode="decimal"
             keyboardType="decimal-pad"
@@ -79,15 +62,15 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
             style={styles.distanceMenu}
             anchor={
               <Pressable
-                accessibilityLabel={t('rod.form.pegDistance')}
+                accessibilityLabel={t('spod.form.pegDistance')}
                 accessibilityRole="button"
                 onPress={() => setIsDistanceMenuOpen(true)}
               >
                 <View pointerEvents="none">
                   <TextInput
                     editable={false}
-                    label={t('rod.form.pegDistance')}
-                    value={t('rod.form.pegDistanceValue', { distance: field.value })}
+                    label={t('spod.form.pegDistance')}
+                    value={t('spod.form.pegDistanceValue', { distance: field.value })}
                     right={<PaperTextInput.Icon icon={isDistanceMenuOpen ? 'menu-up' : 'menu-down'} />}
                   />
                 </View>
@@ -101,14 +84,14 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
                   field.onChange(value);
                   setIsDistanceMenuOpen(false);
                 }}
-                title={t('rod.form.pegDistanceValue', { distance: value })}
+                title={t('spod.form.pegDistanceValue', { distance: value })}
               />
             ))}
           </Menu>
         )}
       />
 
-      {distance !== undefined ? <Text>{t('rod.form.distance', { distance })}</Text> : null}
+      {distance !== undefined ? <Text>{t('spod.form.distance', { distance })}</Text> : null}
 
       <View style={styles.actions}>
         <Button onPress={onCancel} mode="contained-tonal" style={styles.action}>

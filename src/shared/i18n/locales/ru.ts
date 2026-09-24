@@ -67,6 +67,24 @@ export const ru = {
       },
     },
   },
+  spod: {
+    add: 'Добавить спод',
+    editTitle: 'Изменить спод {{number}}',
+    title: 'Спод {{number}}',
+    card: {
+      distance: 'Дистанция {{distance}} метров ({{wraps}} оборотов на колышках)',
+    },
+    form: {
+      distance: 'Дистанция {{distance}} метров',
+      pegDistance: 'Расстояние между колышками',
+      pegDistanceValue: '{{distance}} м',
+      wraps: 'Оборотов на колышках',
+      validation: {
+        positiveNumber: 'Введите число больше 0',
+        required: 'Поле обязательно для заполнения',
+      },
+    },
+  },
   session: {
     duration: {
       hour: 'ч',
