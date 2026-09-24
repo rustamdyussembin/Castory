@@ -19,7 +19,7 @@ interface PreparationSection {
 
 const TaskSeparator = () => <View style={styles.separator} />;
 
-export const PreparationPage = () => {
+export const PreparationScreen = () => {
   const { t } = useTranslation();
   const tasks = usePreparationStore((state) => state.tasks);
   const toggleTask = usePreparationStore((state) => state.toggleTask);

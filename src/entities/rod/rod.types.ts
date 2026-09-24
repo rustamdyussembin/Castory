@@ -10,7 +10,7 @@ export interface Rod {
 
 export interface RodFormData {
   bait: string;
-  wraps: number;
+  wraps?: number;
   pegDistance: PegDistance;
 }
 
