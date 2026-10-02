@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useThemeColors } from '@/shared/theme';
 
-export default function AppTabs() {
+export default function TabsLayout() {
   const { t } = useTranslation();
   const colors = useThemeColors();
 

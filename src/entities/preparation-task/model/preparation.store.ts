@@ -52,6 +52,14 @@ export const usePreparationStore = create<PreparationState>()(
       name: 'preparation-tasks',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: ({ tasks }) => ({ tasks }),
+      version: 1,
+      migrate: (persistedState) => {
+        if (typeof persistedState !== 'object' || persistedState === null) return { tasks: [] };
+
+        const state = persistedState as { tasks?: PreparationState['tasks'] };
+
+        return { tasks: Array.isArray(state.tasks) ? state.tasks : [] };
+      },
     },
   ),
 );
