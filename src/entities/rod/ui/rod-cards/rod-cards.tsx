@@ -2,8 +2,9 @@ import { type FC, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import DraggableFlatList, { type RenderItemParams } from 'react-native-draggable-flatlist';
 
-import { MAX_RODS, useRodStore } from '@/entities/rod';
-import type { Rod } from '@/entities/rod';
+import { MAX_RODS } from '../../rod.constants';
+import { useRodStore } from '../../model/rod.store';
+import type { Rod } from '../../rod.types';
 import { Button } from '@/shared/ui';
 import { spacing } from '@/shared/theme';
 import { useTranslation } from 'react-i18next';
