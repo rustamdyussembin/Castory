@@ -1,8 +1,7 @@
 import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
-import type { PegDistance } from '@/entities/rod';
-import { PEG_DISTANCE_OPTIONS } from '@/shared/lib/peg-distance';
+import { PEG_DISTANCE_OPTIONS, PegDistance } from '@/shared/lib/peg-distance';
 
 import { parseRodWraps } from '../../lib/calculate-rod-distance';
 
