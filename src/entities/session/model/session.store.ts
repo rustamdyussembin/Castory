@@ -56,3 +56,5 @@ export const useSessionStore = create<SessionState>()(
     },
   ),
 );
+
+export const useHasActiveSession = () => useSessionStore((state) => state.activeSession !== null);
