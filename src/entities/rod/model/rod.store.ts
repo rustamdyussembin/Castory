@@ -3,9 +3,9 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { MAX_RODS } from '../rod.constants';
-import type { RodState } from '../rod.types';
+import type { IRodState } from '../rod.types';
 
-export const useRodStore = create<RodState>()(
+export const useRodStore = create<IRodState>()(
   persist(
     (set) => ({
       rods: [],

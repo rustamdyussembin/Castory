@@ -3,9 +3,9 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { formatBiteDateTime } from '../lib/format-bite-date-time';
-import type { FishingResultState } from '../fishing-result.types';
+import type { IFishingResultState } from '../fishing-result.types';
 
-export const useFishingResultStore = create<FishingResultState>()(
+export const useFishingResultStore = create<IFishingResultState>()(
   persist(
     (set) => ({
       fishingResult: null,

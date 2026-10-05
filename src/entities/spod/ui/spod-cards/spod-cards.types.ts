@@ -1,6 +1,6 @@
-import type { Spod } from '../../spod.types';
+import type { ISpod } from '../../spod.types';
 
 export interface ISpodCardsProps {
-  onEdit: (spodId: Spod['id']) => void;
-  spods: Spod[];
+  onEdit: (spodId: ISpod['id']) => void;
+  spods: ISpod[];
 }

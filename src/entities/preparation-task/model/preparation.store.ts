@@ -2,9 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import type { PreparationState } from '../preparation-task.types';
+import type { IPreparationState } from '../preparation-task.types';
 
-export const usePreparationStore = create<PreparationState>()(
+export const usePreparationStore = create<IPreparationState>()(
   persist(
     (set) => ({
       tasks: [],
@@ -56,7 +56,7 @@ export const usePreparationStore = create<PreparationState>()(
       migrate: (persistedState) => {
         if (typeof persistedState !== 'object' || persistedState === null) return { tasks: [] };
 
-        const state = persistedState as { tasks?: PreparationState['tasks'] };
+        const state = persistedState as { tasks?: IPreparationState['tasks'] };
 
         return { tasks: Array.isArray(state.tasks) ? state.tasks : [] };
       },

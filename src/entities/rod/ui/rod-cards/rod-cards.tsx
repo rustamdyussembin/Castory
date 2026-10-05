@@ -4,7 +4,7 @@ import DraggableFlatList, { type RenderItemParams } from 'react-native-draggable
 
 import { MAX_RODS } from '../../rod.constants';
 import { useRodStore } from '../../model/rod.store';
-import type { Rod } from '../../rod.types';
+import type { IRod } from '../../rod.types';
 import { Button } from '@/shared/ui';
 import { spacing } from '@/shared/theme';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +19,7 @@ export const RodCards: FC<IRodCards> = ({ footer, onAdd, onBite, onEdit }) => {
   const hasReachedRodLimit = rods.length >= MAX_RODS;
 
   const renderRod = useCallback(
-    ({ drag, getIndex, isActive, item: rod }: RenderItemParams<Rod>) => (
+    ({ drag, getIndex, isActive, item: rod }: RenderItemParams<IRod>) => (
       <RodCard
         isDragging={isActive}
         number={(getIndex() ?? rods.findIndex(({ id }) => id === rod.id)) + 1}

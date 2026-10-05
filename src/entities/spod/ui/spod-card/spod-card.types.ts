@@ -1,7 +1,7 @@
-import type { Spod } from '../../spod.types';
+import type { ISpod } from '../../spod.types';
 
 export interface ISpodCardProps {
   number: number;
   onEdit: () => void;
-  spod: Spod;
+  spod: ISpod;
 }

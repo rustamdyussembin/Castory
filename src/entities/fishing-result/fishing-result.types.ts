@@ -1,16 +1,16 @@
 import { IFishBiteResult, IFishingResult } from '@/shared/types';
 
-export type AddFishBiteResultData = Omit<IFishBiteResult, 'date' | 'id' | 'time'> & {
+export type IAddFishBiteResultData = Omit<IFishBiteResult, 'date' | 'id' | 'time'> & {
   occurredAt?: number;
 };
 
-export interface FishingResultState {
+export interface IFishingResultState {
   fishingResult: IFishingResult | null;
-  addFishBiteResult: (data: AddFishBiteResultData) => void;
+  addFishBiteResult: (data: IAddFishBiteResultData) => void;
   clearFishingResult: () => void;
 }
 
-export interface FishingResultsState {
+export interface IFishingResultsState {
   sessions: IFishingResult[];
   addSession: (session: IFishingResult) => void;
 }

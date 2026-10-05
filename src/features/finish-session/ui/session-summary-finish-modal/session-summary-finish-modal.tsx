@@ -4,8 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import { ISessionSummaryFinishModalProps } from './session-summary-finish-modal.types';
 import { useTranslation } from 'react-i18next';
 import { spacing } from '@/shared/theme';
-import { formatSessionDuration } from '../../lib/format-session-duration';
 import { formatWeightSessionSummaryFinish } from '../../lib/format-weight-session-summary-finish';
+import { formatSessionDuration } from '@/entities/session';
 
 export const SessionSummaryFinishModal: FC<ISessionSummaryFinishModalProps> = ({
   completedSession,

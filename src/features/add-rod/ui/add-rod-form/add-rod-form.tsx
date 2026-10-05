@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Menu, TextInput as PaperTextInput } from 'react-native-paper';
 
-import type { AddRodData } from '@/entities/rod';
+import type { IAddRodData } from '@/entities/rod';
 import { PEG_DISTANCE_OPTIONS } from '@/shared/lib/peg-distance';
 import { spacing } from '@/shared/theme';
 import { Button, Text, TextInput } from '@/shared/ui';
@@ -21,7 +21,7 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
   const { t } = useTranslation();
   const [isDistanceMenuOpen, setIsDistanceMenuOpen] = useState(false);
   const schema = useMemo(() => createAddRodFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<AddRodFormInput, unknown, AddRodData>({
+  const { control, handleSubmit } = useForm<AddRodFormInput, unknown, IAddRodData>({
     resolver: zodResolver(schema),
     defaultValues: {
       bait: initialValues?.bait ?? '',

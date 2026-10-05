@@ -1,8 +1,8 @@
 import type { SubmitHandler } from 'react-hook-form';
 
-import type { StartSessionData } from '@/entities/session';
+import type { IStartSessionData } from '@/entities/session';
 
 export interface IStartSessionFormProps {
   onCancel: () => void;
-  onSubmit: SubmitHandler<StartSessionData>;
+  onSubmit: SubmitHandler<IStartSessionData>;
 }

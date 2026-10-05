@@ -1,9 +1,9 @@
-import type { Rod } from '../../rod.types';
+import type { IRod } from '../../rod.types';
 
 export interface IRodCardProps {
   isDragging: boolean;
   number: number;
-  rod: Rod;
+  rod: IRod;
   onBite: () => void;
   onDrag: () => void;
   onEdit: () => void;

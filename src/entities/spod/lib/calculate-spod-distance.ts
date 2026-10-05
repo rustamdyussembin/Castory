@@ -1,6 +1,6 @@
 import { calculatePegDistance } from '@/shared/lib/peg-distance';
 
-import type { Spod } from '../spod.types';
+import type { ISpod } from '../spod.types';
 
-export const calculateSpodDistance = (wraps: Spod['wraps'], pegDistance: Spod['pegDistance']): number =>
+export const calculateSpodDistance = (wraps: ISpod['wraps'], pegDistance: ISpod['pegDistance']): number =>
   calculatePegDistance(wraps, pegDistance);

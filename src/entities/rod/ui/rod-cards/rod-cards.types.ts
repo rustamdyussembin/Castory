@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 
-import type { Rod } from '../../rod.types';
+import type { IRod } from '../../rod.types';
 
 export interface IRodCards {
   footer?: ReactNode;
   onAdd: () => void;
-  onBite: (rodId: Rod['id']) => void;
-  onEdit: (rodId: Rod['id']) => void;
+  onBite: (rodId: IRod['id']) => void;
+  onEdit: (rodId: IRod['id']) => void;
 }

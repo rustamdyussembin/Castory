@@ -1,6 +1,6 @@
-import type { PreparationTask, SortedPreparationTasks } from '../preparation-task.types';
+import type { IPreparationTask, ISortedPreparationTasks } from '../preparation-task.types';
 
-export const getSortedPreparationTasks = (tasks: PreparationTask[]): SortedPreparationTasks => ({
+export const getSortedPreparationTasks = (tasks: IPreparationTask[]): ISortedPreparationTasks => ({
   activeTasks: tasks.filter((task) => !task.isCompleted).sort((first, second) => second.createdAt - first.createdAt),
   completedTasks: tasks
     .filter((task) => task.isCompleted)

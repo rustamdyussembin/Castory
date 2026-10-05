@@ -1,7 +1,7 @@
-import type { PreparationTask } from '../../preparation-task.types';
+import type { IPreparationTask } from '../../preparation-task.types';
 
 export interface IPreparationTaskItemProps {
-  task: PreparationTask;
+  task: IPreparationTask;
   onRemove: () => void;
   onToggle: () => void;
 }

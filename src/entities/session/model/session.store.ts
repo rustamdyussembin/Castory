@@ -2,23 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import type { ActiveSession, SessionState } from '../session.types';
+import type { ISessionState } from '../session.types';
+import { isActiveSession } from '../lib/is-active-session';
 
-const isActiveSession = (value: unknown): value is ActiveSession => {
-  if (typeof value !== 'object' || value === null) return false;
-
-  const session = value as Partial<ActiveSession>;
-
-  return (
-    typeof session.venue === 'string' &&
-    session.venue.length > 0 &&
-    (session.sector === undefined || typeof session.sector === 'string') &&
-    typeof session.startedAt === 'number' &&
-    Number.isFinite(session.startedAt)
-  );
-};
-
-export const useSessionStore = create<SessionState>()(
+export const useSessionStore = create<ISessionState>()(
   persist(
     (set) => ({
       activeSession: null,

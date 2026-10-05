@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Menu, TextInput as PaperTextInput } from 'react-native-paper';
 
-import type { SpodFormData } from '@/entities/spod';
+import type { ISpodFormData } from '@/entities/spod';
 import { PEG_DISTANCE_OPTIONS } from '@/shared/lib/peg-distance';
 import { spacing } from '@/shared/theme';
 import { Button, Text, TextInput } from '@/shared/ui';
@@ -21,7 +21,7 @@ export const AddSpodForm: FC<IAddSpodFormProps> = ({ initialValues, onCancel, on
   const { t } = useTranslation();
   const [isDistanceMenuOpen, setIsDistanceMenuOpen] = useState(false);
   const schema = useMemo(() => createAddSpodFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<AddSpodFormInput, unknown, SpodFormData>({
+  const { control, handleSubmit } = useForm<AddSpodFormInput, unknown, ISpodFormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       wraps: initialValues ? String(initialValues.wraps) : '',

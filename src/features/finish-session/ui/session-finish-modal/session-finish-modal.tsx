@@ -7,7 +7,7 @@ import { ISessionFinishModalProps } from './session-finish-modal.types';
 
 export const SessionFinishModal: FC<ISessionFinishModalProps> = ({
   isConfirmationOpen,
-  onSetIsConfirmationOpen,
+  onCloseConfirmationModal,
   onConfirmFinish,
 }) => {
   const { t } = useTranslation();
@@ -16,12 +16,12 @@ export const SessionFinishModal: FC<ISessionFinishModalProps> = ({
     <Modal
       visible={isConfirmationOpen}
       title={t('session.finishConfirmation.title')}
-      onClose={() => onSetIsConfirmationOpen(false)}
+      onClose={onCloseConfirmationModal}
     >
       <View style={styles.modalContent}>
         <Text variant="bodyS">{t('session.finishConfirmation.description')}</Text>
         <View style={styles.actions}>
-          <Button mode="contained-tonal" onPress={() => onSetIsConfirmationOpen(false)} style={styles.action}>
+          <Button mode="contained-tonal" onPress={onCloseConfirmationModal} style={styles.action}>
             {t('common.cancel')}
           </Button>
           <Button onPress={onConfirmFinish} style={styles.action}>

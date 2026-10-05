@@ -1,16 +1,16 @@
 import type { PegDistance } from '@/shared/lib/peg-distance';
 
-export interface Spod {
+export interface ISpod {
   id: string;
   wraps: number;
   pegDistance: PegDistance;
 }
 
-export type SpodFormData = Pick<Spod, 'pegDistance' | 'wraps'>;
+export type ISpodFormData = Pick<ISpod, 'pegDistance' | 'wraps'>;
 
-export interface SpodState {
-  spods: Spod[];
-  addSpod: (data: SpodFormData) => void;
-  updateSpod: (id: string, data: SpodFormData) => void;
+export interface ISpodState {
+  spods: ISpod[];
+  addSpod: (data: ISpodFormData) => void;
+  updateSpod: (id: string, data: ISpodFormData) => void;
   clearSpods: () => void;
 }

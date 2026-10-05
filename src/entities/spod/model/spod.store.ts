@@ -3,9 +3,9 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { MAX_SPODS } from '../spod.constants';
-import type { SpodState } from '../spod.types';
+import type { ISpodState } from '../spod.types';
 
-export const useSpodStore = create<SpodState>()(
+export const useSpodStore = create<ISpodState>()(
   persist(
     (set) => ({
       spods: [],
