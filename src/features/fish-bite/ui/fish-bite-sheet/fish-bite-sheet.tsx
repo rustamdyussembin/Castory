@@ -9,7 +9,7 @@ import { IFishBiteData } from '@/shared/types';
 import { calculateRodDistance, getTimeInWaterMinutes, useRodStore } from '@/entities/rod';
 import { useSessionStore } from '@/entities/session';
 import { useFishingResultStore } from '@/entities/fishing-result';
-import { useFishBiteStore } from '@/widgets/fish-bite';
+import { useFishBiteStore } from '../../model/fish-bite.store';
 
 export const FishBiteSheet: FC = () => {
   const { t } = useTranslation();

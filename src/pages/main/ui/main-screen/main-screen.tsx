@@ -8,7 +8,7 @@ import { StartSessionSheet, useStartSessionStore } from '@/features/start-sessio
 import { Button } from '@/shared/ui';
 import { SessionHeader } from '@/widgets/session-header';
 import { SessionSpods } from '@/widgets/session-spods';
-import { FishBiteSheet, useFishBiteStore } from '@/widgets/fish-bite';
+import { FishBiteSheet, useFishBiteStore } from '@/features/fish-bite';
 import { useHasActiveSession } from '@/entities/session';
 
 export const MainScreen = () => {

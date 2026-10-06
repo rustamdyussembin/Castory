@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { SessionFinishModal } from '../session-finish-modal/session-finish-modal';
 import { SessionSummaryFinishModal } from '../session-summary-finish-modal/session-summary-finish-modal';
-import { useFinishSessionConfirmationModalStore } from '@/entities/finish-session';
+import { useFinishSessionConfirmationModalStore } from '../../model/finish-session.store';
 import {
   calculateFishingResultStats,
   createFishingResult,

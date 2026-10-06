@@ -3,8 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { SessionSummary } from '@/entities/session';
 import { WeatherSummary } from '@/entities/weather';
 import { spacing } from '@/shared/theme';
-import { FinishSession } from '@/features/finish-session';
-import { useFinishSessionConfirmationModalStore } from '@/entities/finish-session';
+import { FinishSession, useFinishSessionConfirmationModalStore } from '@/features/finish-session';
 
 export const SessionHeader = () => {
   const openConfirmationModal = useFinishSessionConfirmationModalStore((state) => state.openModal);
