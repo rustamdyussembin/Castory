@@ -1,17 +1,15 @@
-import type { PegDistance } from '@/shared/lib/peg-distance';
-
 export interface IRod {
   id: string;
   bait: string;
   wraps?: number;
-  pegDistance: PegDistance;
+  pegDistance: number;
   castAt: number;
 }
 
 export interface IRodFormData {
   bait: string;
   wraps?: number;
-  pegDistance: PegDistance;
+  pegDistance: number;
 }
 
 export type IAddRodData = IRodFormData;

@@ -6,9 +6,9 @@ import { IconButton } from 'react-native-paper';
 import { spacing, useThemeColors } from '@/shared/theme';
 import { Button, Text } from '@/shared/ui';
 
-import { calculateRodDistance } from '../../lib/calculate-rod-distance';
 import { getTimeInWaterMinutes } from '../../lib/get-time-in-water-minutes';
 import type { IRodCardProps } from './rod-card.types';
+import { calculateDistance } from '@/shared/lib/distance';
 
 const TIMER_UPDATE_INTERVAL_MS = 60_000;
 
@@ -30,7 +30,7 @@ export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag,
   }, []);
 
   const wraps = rod.wraps;
-  const distance = calculateRodDistance(wraps, rod.pegDistance);
+  const distance = calculateDistance(wraps, rod.pegDistance);
   const timeInWaterMinutes = getTimeInWaterMinutes(rod.castAt, now);
   const timeInWater =
     timeInWaterMinutes >= 60

@@ -5,10 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { BottomSheet } from '@/shared/ui';
 
 import { FishBiteForm } from '../fish-bite-form/fish-bite-form';
-import { calculateRodDistance, getTimeInWaterMinutes, useRodStore } from '@/entities/rod';
+import { getTimeInWaterMinutes, useRodStore } from '@/entities/rod';
 import { useSessionStore } from '@/entities/session';
 import { IFishBiteData, useFishingResultStore } from '@/entities/fishing-result';
 import { useFishBiteStore } from '../../model/fish-bite.store';
+import { calculateDistance } from '@/shared/lib/distance';
 
 export const FishBiteSheet: FC = () => {
   const { t } = useTranslation();
@@ -35,7 +36,7 @@ export const FishBiteSheet: FC = () => {
       rodNumber: rods.indexOf(biteRod) + 1,
       bait: biteRod.bait,
       timeInWaterMinutes: getTimeInWaterMinutes(biteRod.castAt, occurredAt),
-      distance: calculateRodDistance(biteRod.wraps, biteRod.pegDistance),
+      distance: calculateDistance(biteRod.wraps, biteRod.pegDistance),
       sector: activeSession.sector,
       venue: activeSession.venue,
       occurredAt,

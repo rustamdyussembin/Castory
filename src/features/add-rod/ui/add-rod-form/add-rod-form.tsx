@@ -6,16 +6,16 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Menu, TextInput as PaperTextInput } from 'react-native-paper';
 
 import type { IAddRodData } from '@/entities/rod';
-import { PEG_DISTANCE_OPTIONS } from '@/shared/lib/peg-distance';
 import { spacing } from '@/shared/theme';
 import { Button, Text, TextInput } from '@/shared/ui';
 
-import { calculateRodDistance } from '../../lib/calculate-rod-distance';
 import { createAddRodFormSchema, type AddRodFormInput } from './add-rod-form.schema';
 import type { IAddRodFormProps } from './add-rod-form.types';
+import { calculateDistance } from '@/shared/lib/distance';
+import { DISTANCE_OPTIONS } from '@/shared/constants';
 
 const MENU_ITEM_HEIGHT = 48;
-const DISTANCE_MENU_HEIGHT = PEG_DISTANCE_OPTIONS.length * MENU_ITEM_HEIGHT + spacing[3] * 2;
+const DISTANCE_MENU_HEIGHT = DISTANCE_OPTIONS.length * MENU_ITEM_HEIGHT + spacing[3] * 2;
 
 export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSubmit }) => {
   const { t } = useTranslation();
@@ -26,11 +26,11 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
     defaultValues: {
       bait: initialValues?.bait ?? '',
       wraps: initialValues?.wraps === undefined ? '' : String(initialValues.wraps),
-      pegDistance: initialValues ? (String(initialValues.pegDistance) as (typeof PEG_DISTANCE_OPTIONS)[number]) : '3',
+      pegDistance: initialValues ? (String(initialValues.pegDistance) as (typeof DISTANCE_OPTIONS)[number]) : '3',
     },
   });
   const [wraps, pegDistance] = useWatch({ control, name: ['wraps', 'pegDistance'] });
-  const distance = calculateRodDistance(wraps, pegDistance);
+  const distance = calculateDistance(wraps, pegDistance);
 
   return (
     <View style={styles.container}>
@@ -94,7 +94,7 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
               </Pressable>
             }
           >
-            {PEG_DISTANCE_OPTIONS.map((value) => (
+            {DISTANCE_OPTIONS.map((value) => (
               <Menu.Item
                 key={value}
                 onPress={() => {

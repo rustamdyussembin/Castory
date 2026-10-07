@@ -6,16 +6,16 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { Menu, TextInput as PaperTextInput } from 'react-native-paper';
 
 import type { ISpodFormData } from '@/entities/spod';
-import { PEG_DISTANCE_OPTIONS } from '@/shared/lib/peg-distance';
 import { spacing } from '@/shared/theme';
 import { Button, Text, TextInput } from '@/shared/ui';
 
-import { calculateSpodFormDistance } from '../../lib/calculate-spod-form-distance';
 import { createAddSpodFormSchema, type AddSpodFormInput } from './add-spod-form.schema';
 import type { IAddSpodFormProps } from './add-spod-form.types';
+import { calculateFormDistance } from '@/shared/lib/distance';
+import { DISTANCE_OPTIONS } from '@/shared/constants';
 
 const MENU_ITEM_HEIGHT = 48;
-const DISTANCE_MENU_HEIGHT = PEG_DISTANCE_OPTIONS.length * MENU_ITEM_HEIGHT + spacing[3] * 2;
+const DISTANCE_MENU_HEIGHT = DISTANCE_OPTIONS.length * MENU_ITEM_HEIGHT + spacing[3] * 2;
 
 export const AddSpodForm: FC<IAddSpodFormProps> = ({ initialValues, onCancel, onSubmit }) => {
   const { t } = useTranslation();
@@ -25,11 +25,11 @@ export const AddSpodForm: FC<IAddSpodFormProps> = ({ initialValues, onCancel, on
     resolver: zodResolver(schema),
     defaultValues: {
       wraps: initialValues ? String(initialValues.wraps) : '',
-      pegDistance: initialValues ? (String(initialValues.pegDistance) as (typeof PEG_DISTANCE_OPTIONS)[number]) : '3',
+      pegDistance: initialValues ? (String(initialValues.pegDistance) as (typeof DISTANCE_OPTIONS)[number]) : '3',
     },
   });
   const [wraps, pegDistance] = useWatch({ control, name: ['wraps', 'pegDistance'] });
-  const distance = calculateSpodFormDistance(wraps, pegDistance);
+  const distance = calculateFormDistance(wraps, pegDistance);
 
   return (
     <View style={styles.container}>
@@ -77,7 +77,7 @@ export const AddSpodForm: FC<IAddSpodFormProps> = ({ initialValues, onCancel, on
               </Pressable>
             }
           >
-            {PEG_DISTANCE_OPTIONS.map((value) => (
+            {DISTANCE_OPTIONS.map((value) => (
               <Menu.Item
                 key={value}
                 onPress={() => {
