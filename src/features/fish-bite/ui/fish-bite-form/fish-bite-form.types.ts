@@ -1,5 +1,5 @@
 import type { SubmitHandler } from 'react-hook-form';
-import { IFishBiteData } from '@/shared/types';
+import { IFishBiteData } from '@/entities/fishing-result';
 
 export interface IFishBiteFormProps {
   onCancel: () => void;

@@ -5,10 +5,10 @@ import { useFinishSessionConfirmationModalStore } from '../../model/finish-sessi
 import {
   calculateFishingResultStats,
   createFishingResult,
+  ICompletedSessionSummary,
   useFishingResultsStore,
   useFishingResultStore,
 } from '@/entities/fishing-result';
-import { ICompletedSessionSummary } from '@/shared/types';
 import { useSessionStore } from '@/entities/session';
 import { useRodStore } from '@/entities/rod';
 import { useSpodStore } from '@/entities/spod';

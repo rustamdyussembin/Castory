@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { ICompletedSessionSummary, IFishingResultStats } from '@/shared/types';
+import { ICompletedSessionSummary, IFishingResultStats } from '@/entities/fishing-result';
 
 export interface ISessionSummaryFinishModalProps {
   completedSession: ICompletedSessionSummary | null;

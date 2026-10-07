@@ -1,5 +1,5 @@
+import { ICreateFishingResultData, IFishingResult } from '../fishing-result.types';
 import { formatBiteDateTime } from './format-bite-date-time';
-import { ICreateFishingResultData, IFishingResult } from '@/shared/types';
 
 export const createFishingResult = (
   { sector, venue }: ICreateFishingResultData,
