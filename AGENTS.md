@@ -16,6 +16,9 @@
 - Do not create parallel stores, APIs, or abstractions if an existing implementation can be extended.
 - Audit the existing implementation before making architectural changes.
 - Keep business logic independent from React where practical.
+- Slice-wide types and constants live in the slice root as `<slice>.types.ts` and `<slice>.constants.ts`
+  (e.g. `entities/rod/rod.types.ts`), next to `index.ts`. Do not move them into `model/` or `config/`.
+- API-specific code (DTO types, endpoint constants, response parsing and mapping) lives in the `api/` segment.
 
 ## UI structure
 Each UI component lives in its own directory.

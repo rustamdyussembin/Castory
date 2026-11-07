@@ -1,8 +1,8 @@
 import type { ICoordinates } from '@/shared/lib/location';
 
 import type { IWeather } from '../weather.types';
-import { ECMWF_API_URL, WEATHER_API_FIELDS, WEATHER_API_FORECAST_HOURS } from '../weather.constants';
-import { mapWeather } from '../lib/weather.helpers';
+import { ECMWF_API_URL, WEATHER_API_FIELDS, WEATHER_API_FORECAST_HOURS } from './weather-api.constants';
+import { mapWeather } from './map-weather';
 
 export const getWeather = async (coordinates: ICoordinates, signal?: AbortSignal): Promise<IWeather> => {
   const params = new URLSearchParams({

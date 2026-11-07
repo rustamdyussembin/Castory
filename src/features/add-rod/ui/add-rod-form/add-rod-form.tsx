@@ -12,7 +12,7 @@ import { Button, Text, TextInput } from '@/shared/ui';
 import { createAddRodFormSchema, type AddRodFormInput } from './add-rod-form.schema';
 import type { IAddRodFormProps } from './add-rod-form.types';
 import { calculateDistance } from '@/shared/lib/distance';
-import { DISTANCE_OPTIONS } from '@/shared/constants';
+import { DISTANCE_OPTIONS } from '@/shared/config';
 
 const MENU_ITEM_HEIGHT = 48;
 const DISTANCE_MENU_HEIGHT = DISTANCE_OPTIONS.length * MENU_ITEM_HEIGHT + spacing[3] * 2;

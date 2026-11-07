@@ -12,7 +12,7 @@ import { Button, Text, TextInput } from '@/shared/ui';
 import { createAddSpodFormSchema, type AddSpodFormInput } from './add-spod-form.schema';
 import type { IAddSpodFormProps } from './add-spod-form.types';
 import { calculateFormDistance } from '@/shared/lib/distance';
-import { DISTANCE_OPTIONS } from '@/shared/constants';
+import { DISTANCE_OPTIONS } from '@/shared/config';
 
 const MENU_ITEM_HEIGHT = 48;
 const DISTANCE_MENU_HEIGHT = DISTANCE_OPTIONS.length * MENU_ITEM_HEIGHT + spacing[3] * 2;

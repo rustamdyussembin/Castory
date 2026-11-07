@@ -5,7 +5,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { isSupportedLanguage, resolveDeviceLanguage } from '@/shared/i18n';
 
-import type { ISettingsState } from './settings.types';
+import type { ISettingsState } from '../settings.types';
 
 const initialLanguage = resolveDeviceLanguage(getLocales().map((locale) => locale.languageCode));
 

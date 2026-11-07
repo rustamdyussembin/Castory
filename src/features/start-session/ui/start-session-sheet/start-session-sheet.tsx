@@ -5,7 +5,7 @@ import { useSessionStore } from '@/entities/session';
 import { useSpodStore } from '@/entities/spod';
 import { BottomSheet } from '@/shared/ui';
 
-import { useStartSessionStore } from '../../model/start-session';
+import { useStartSessionStore } from '../../model/start-session.store';
 import { StartSessionForm } from '../start-session-form/start-session-form';
 
 export const StartSessionSheet = () => {

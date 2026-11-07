@@ -18,11 +18,4 @@ export default defineConfig([
       'fsd/inconsistent-naming': 'warn',
     },
   },
-  {
-    // `shared/constants` will be renamed to `shared/config`.
-    files: ['./src/shared/constants/**'],
-    rules: {
-      'fsd/segments-by-purpose': 'warn',
-    },
-  },
 ]);

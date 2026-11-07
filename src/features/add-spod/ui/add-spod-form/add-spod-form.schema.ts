@@ -1,7 +1,7 @@
 import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
-import { DISTANCE_OPTIONS } from '@/shared/constants';
+import { DISTANCE_OPTIONS } from '@/shared/config';
 import { parseWraps } from '@/shared/lib/distance';
 
 export const createAddSpodFormSchema = (t: TFunction) =>
