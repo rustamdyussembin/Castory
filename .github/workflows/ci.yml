@@ -37,5 +37,8 @@ jobs:
       - name: ESLint
         run: yarn lint
 
+      - name: FSD architecture (Steiger)
+        run: yarn lint:fsd
+
       - name: Production bundle
         run: yarn build:check
