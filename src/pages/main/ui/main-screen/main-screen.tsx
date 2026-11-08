@@ -1,21 +1,18 @@
 import { StyleSheet, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
 
 import { RodCards } from '@/entities/rod';
-import { AddRodSheet, useAddRodStore } from '@/features/add-rod';
+import { AddRodSheet, useOpenAddRodSheet, useOpenEditRodSheet } from '@/features/add-rod';
 import { AddSpodSheet } from '@/features/add-spod';
-import { StartSessionSheet, useStartSessionStore } from '@/features/start-session';
-import { Button } from '@/shared/ui';
+import { StartSessionButton, StartSessionSheet } from '@/features/start-session';
 import { SessionHeader } from '@/widgets/session-header';
 import { SessionSpods } from '@/widgets/session-spods';
-import { FishBiteSheet, useFishBiteStore } from '@/features/fish-bite';
+import { FishBiteSheet, useOpenFishBiteSheet } from '@/features/fish-bite';
 import { useHasActiveSession } from '@/entities/session';
 
 export const MainScreen = () => {
-  const { t } = useTranslation();
-  const openAddRodSheet = useAddRodStore((state) => state.openSheet);
-  const openFishBiteSheet = useFishBiteStore((state) => state.openSheet);
-  const openStartSessionSheet = useStartSessionStore((state) => state.openSheet);
+  const openAddRodSheet = useOpenAddRodSheet();
+  const openEditRodSheet = useOpenEditRodSheet();
+  const openFishBiteSheet = useOpenFishBiteSheet();
   const hasActiveSession = useHasActiveSession();
 
   return (
@@ -24,14 +21,14 @@ export const MainScreen = () => {
       {hasActiveSession && (
         <RodCards
           footer={<SessionSpods />}
-          onAdd={() => openAddRodSheet()}
+          onAdd={openAddRodSheet}
           onBite={openFishBiteSheet}
-          onEdit={openAddRodSheet}
+          onEdit={openEditRodSheet}
         />
       )}
       {!hasActiveSession && (
         <View style={styles.startButtonContainer}>
-          <Button onPress={openStartSessionSheet}>{t('session.start')}</Button>
+          <StartSessionButton />
         </View>
       )}
       <StartSessionSheet />

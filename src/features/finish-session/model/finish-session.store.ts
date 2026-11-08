@@ -12,3 +12,6 @@ export const useFinishSessionConfirmationModalStore = create<IFinishSessionConfi
     set({ isModalOpen: false });
   },
 }));
+
+export const useOpenFinishSessionConfirmation = (): (() => void) =>
+  useFinishSessionConfirmationModalStore((state) => state.openModal);

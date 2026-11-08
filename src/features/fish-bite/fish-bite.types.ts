@@ -1,6 +1,6 @@
 export interface IFishBiteState {
   editingId: string | null;
   isSheetOpen: boolean;
-  openSheet: (spodId?: string) => void;
+  openSheet: (rodId?: string) => void;
   closeSheet: () => void;
 }
