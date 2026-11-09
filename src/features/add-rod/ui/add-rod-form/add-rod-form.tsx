@@ -12,6 +12,7 @@ import { Button, Text, TextInput } from '@/shared/ui';
 import { createAddRodFormSchema, type AddRodFormInput } from './add-rod-form.schema';
 import type { IAddRodFormProps } from './add-rod-form.types';
 import { calculateDistance } from '@/shared/lib/distance';
+import { parsePositiveDecimal } from '@/shared/lib/number';
 import { DISTANCE_OPTIONS } from '@/shared/config';
 
 const MENU_ITEM_HEIGHT = 48;
@@ -30,7 +31,7 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
     },
   });
   const [wraps, pegDistance] = useWatch({ control, name: ['wraps', 'pegDistance'] });
-  const distance = calculateDistance(wraps, pegDistance);
+  const distance = calculateDistance(parsePositiveDecimal(wraps), Number(pegDistance));
 
   return (
     <View style={styles.container}>

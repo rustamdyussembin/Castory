@@ -7,8 +7,7 @@ import { AppState, type AppStateStatus, Platform, StyleSheet, useColorScheme } f
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 
-import { useSettingsStore } from '@/entities/settings';
-import { i18n, i18nInitialization } from '@/shared/i18n';
+import { i18n, i18nInitialization, useLanguageStore } from '@/shared/i18n';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -16,7 +15,7 @@ const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const language = useSettingsStore((state) => state.language);
+  const language = useLanguageStore((state) => state.language);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -24,8 +23,8 @@ export default function RootLayout() {
 
     const initialize = async () => {
       try {
-        await Promise.all([i18nInitialization, useSettingsStore.persist.rehydrate()]);
-        await i18n.changeLanguage(useSettingsStore.getState().language);
+        await Promise.all([i18nInitialization, useLanguageStore.persist.rehydrate()]);
+        await i18n.changeLanguage(useLanguageStore.getState().language);
       } catch (error) {
         console.error('Failed to initialize localization', error);
       } finally {

@@ -2,7 +2,7 @@ import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
 import { DISTANCE_OPTIONS } from '@/shared/config';
-import { parseWraps } from '@/shared/lib/distance';
+import { parsePositiveDecimal } from '@/shared/lib/number';
 
 const MAX_BAIT_LENGTH = 100;
 
@@ -16,8 +16,11 @@ export const createAddRodFormSchema = (t: TFunction) =>
     wraps: z
       .string()
       .trim()
-      .refine((value) => value.length === 0 || parseWraps(value) !== undefined, t('rod.form.validation.positiveNumber'))
-      .transform((value) => parseWraps(value)),
+      .refine(
+        (value) => value.length === 0 || parsePositiveDecimal(value) !== undefined,
+        t('rod.form.validation.positiveNumber'),
+      )
+      .transform((value) => parsePositiveDecimal(value)),
     pegDistance: z.enum(DISTANCE_OPTIONS).transform((value) => Number(value)),
   });
 

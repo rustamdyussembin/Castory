@@ -9,13 +9,4 @@ export default defineConfig([
       'fsd/insignificant-slice': 'off',
     },
   },
-
-  // Baseline: known violations scheduled for the FSD refactoring. Remove each block once it is fixed.
-  {
-    // `entities/settings` is the only plural entity name; it will be moved out of entities.
-    files: ['./src/entities/**'],
-    rules: {
-      'fsd/inconsistent-naming': 'warn',
-    },
-  },
 ]);

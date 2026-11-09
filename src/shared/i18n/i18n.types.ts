@@ -6,3 +6,8 @@ export const DEFAULT_LANGUAGE: SupportedLanguage = 'ru';
 
 export const isSupportedLanguage = (language: unknown): language is SupportedLanguage =>
   typeof language === 'string' && SUPPORTED_LANGUAGES.some((supportedLanguage) => supportedLanguage === language);
+
+export interface ILanguageState {
+  language: SupportedLanguage;
+  setLanguage: (language: SupportedLanguage) => void;
+}

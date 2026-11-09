@@ -11,7 +11,8 @@ import { Button, Text, TextInput } from '@/shared/ui';
 
 import { createAddSpodFormSchema, type AddSpodFormInput } from './add-spod-form.schema';
 import type { IAddSpodFormProps } from './add-spod-form.types';
-import { calculateFormDistance } from '@/shared/lib/distance';
+import { calculateDistance } from '@/shared/lib/distance';
+import { parsePositiveDecimal } from '@/shared/lib/number';
 import { DISTANCE_OPTIONS } from '@/shared/config';
 
 const MENU_ITEM_HEIGHT = 48;
@@ -29,7 +30,7 @@ export const AddSpodForm: FC<IAddSpodFormProps> = ({ initialValues, onCancel, on
     },
   });
   const [wraps, pegDistance] = useWatch({ control, name: ['wraps', 'pegDistance'] });
-  const distance = calculateFormDistance(wraps, pegDistance);
+  const distance = calculateDistance(parsePositiveDecimal(wraps), Number(pegDistance));
 
   return (
     <View style={styles.container}>

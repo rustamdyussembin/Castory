@@ -3,19 +3,19 @@ import { getLocales } from 'expo-localization';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import { isSupportedLanguage, resolveDeviceLanguage } from '@/shared/i18n';
-
-import type { ISettingsState } from '../settings.types';
+import { type ILanguageState, isSupportedLanguage } from './i18n.types';
+import { resolveDeviceLanguage } from './resolve-device-language';
 
 const initialLanguage = resolveDeviceLanguage(getLocales().map((locale) => locale.languageCode));
 
-export const useSettingsStore = create<ISettingsState>()(
+export const useLanguageStore = create<ILanguageState>()(
   persist(
     (set) => ({
       language: initialLanguage,
       setLanguage: (language) => set({ language }),
     }),
     {
+      // The storage key is kept from the former `entities/settings` store to preserve the persisted language.
       name: 'settings',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: ({ language }) => ({ language }),
