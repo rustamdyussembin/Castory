@@ -8,7 +8,6 @@ export const ru = {
     save: 'Сохранить',
   },
   navigation: {
-    explore: 'Обзор',
     preparation: 'Подготовка',
     session: 'Сессия',
   },
@@ -121,6 +120,7 @@ export const ru = {
   weather: {
     loading: 'Загрузка погоды...',
     unavailable: 'Погода недоступна',
+    temperature: '{{temperature}}°C',
     wind: '{{direction}} {{speed}} м/с',
     windInHours_one: 'Через {{count}} час: {{direction}} {{speed}} м/с',
     windInHours_few: 'Через {{count}} часа: {{direction}} {{speed}} м/с',

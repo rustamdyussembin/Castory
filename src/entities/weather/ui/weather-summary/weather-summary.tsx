@@ -31,7 +31,9 @@ export const WeatherSummary = () => {
 
   return (
     <View style={styles.container}>
-      <Text variant="bodyS">{roundToString(weather.current.temperature)}°C</Text>
+      <Text variant="bodyS">
+        {t('weather.temperature', { temperature: roundToString(weather.current.temperature) })}
+      </Text>
       <Text variant="bodyS">
         {t('weather.wind', {
           direction: localizedCurrentDirection,

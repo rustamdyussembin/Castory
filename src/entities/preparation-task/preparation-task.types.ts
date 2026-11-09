@@ -1,4 +1,4 @@
-export interface PreparationTask {
+export interface IPreparationTask {
   id: string;
   title: string;
   isCompleted: boolean;
@@ -6,14 +6,14 @@ export interface PreparationTask {
   completedAt?: number;
 }
 
-export interface PreparationState {
-  tasks: PreparationTask[];
+export interface IPreparationState {
+  tasks: IPreparationTask[];
   addTask: (title: string) => void;
   toggleTask: (id: string) => void;
   removeTask: (id: string) => void;
 }
 
-export interface SortedPreparationTasks {
-  activeTasks: PreparationTask[];
-  completedTasks: PreparationTask[];
+export interface ISortedPreparationTasks {
+  activeTasks: IPreparationTask[];
+  completedTasks: IPreparationTask[];
 }

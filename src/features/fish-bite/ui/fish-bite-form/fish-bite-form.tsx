@@ -9,7 +9,7 @@ import { Button, TextInput } from '@/shared/ui';
 
 import { createFishBiteFormSchema, type FishBiteFormInput } from './fish-bite-form.schema';
 import type { IFishBiteFormProps } from './fish-bite-form.types';
-import { IFishBiteData } from '@/shared/types';
+import { IFishBiteData } from '@/entities/fishing-result';
 
 export const FishBiteForm: FC<IFishBiteFormProps> = ({ onCancel, onSubmit }) => {
   const { t } = useTranslation();

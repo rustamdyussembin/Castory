@@ -6,13 +6,13 @@ import { spacing } from '@/shared/theme';
 import { SpodCard } from '../spod-card/spod-card';
 import type { ISpodCardsProps } from './spod-cards.types';
 
-export const SpodCards: FC<ISpodCardsProps> = ({ onEdit, spods }) => {
+export const SpodCards: FC<ISpodCardsProps> = ({ renderActions, spods }) => {
   if (spods.length === 0) return null;
 
   return (
     <View style={styles.container}>
       {spods.map((spod, index) => (
-        <SpodCard key={spod.id} number={index + 1} onEdit={() => onEdit(spod.id)} spod={spod} />
+        <SpodCard key={spod.id} number={index + 1} actions={renderActions?.(spod)} spod={spod} />
       ))}
     </View>
   );

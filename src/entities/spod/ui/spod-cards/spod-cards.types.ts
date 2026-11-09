@@ -1,6 +1,8 @@
-import type { Spod } from '../../spod.types';
+import type { ReactNode } from 'react';
+
+import type { ISpod } from '../../spod.types';
 
 export interface ISpodCardsProps {
-  onEdit: (spodId: Spod['id']) => void;
-  spods: Spod[];
+  renderActions?: (spod: ISpod) => ReactNode;
+  spods: ISpod[];
 }

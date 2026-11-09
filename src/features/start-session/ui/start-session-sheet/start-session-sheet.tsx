@@ -1,11 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
-import { useRodStore } from '@/entities/rod';
-import { useSessionStore } from '@/entities/session';
-import { useSpodStore } from '@/entities/spod';
+import type { IStartSessionData } from '@/entities/session';
 import { BottomSheet } from '@/shared/ui';
 
-import { useStartSessionStore } from '../../model/start-session';
+import { startNewSession } from '../../model/start-session';
+import { useStartSessionStore } from '../../model/start-session.store';
 import { StartSessionForm } from '../start-session-form/start-session-form';
 
 export const StartSessionSheet = () => {
@@ -13,14 +12,8 @@ export const StartSessionSheet = () => {
   const isOpen = useStartSessionStore((state) => state.isSheetOpen);
   const closeSheet = useStartSessionStore((state) => state.closeSheet);
 
-  const startSession = useSessionStore((state) => state.startSession);
-  const clearRods = useRodStore((state) => state.clearRods);
-  const clearSpods = useSpodStore((state) => state.clearSpods);
-
-  const handleSubmit = (data: Parameters<typeof startSession>[0]) => {
-    clearRods();
-    clearSpods();
-    startSession(data);
+  const handleSubmit = (data: IStartSessionData) => {
+    startNewSession(data);
     closeSheet();
   };
 

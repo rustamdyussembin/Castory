@@ -1,70 +1,28 @@
-import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
 
-import { useFishingResultStore } from '@/entities/fishing-result';
-import { calculateRodDistance, getTimeInWaterMinutes, RodCards, useRodStore } from '@/entities/rod';
-import { useSessionStore } from '@/entities/session';
-import { AddRodSheet, useAddRodStore } from '@/features/add-rod';
+import { useHasActiveSession } from '@/entities/session';
+import { AddRodSheet } from '@/features/add-rod';
 import { AddSpodSheet } from '@/features/add-spod';
 import { FishBiteSheet } from '@/features/fish-bite';
-import { StartSessionSheet, useStartSessionStore } from '@/features/start-session';
-import { IFishBiteData } from '@/shared/types';
-import { Button } from '@/shared/ui';
-import { SessionHeader } from '@/widgets/session-header';
-import { SessionSpods } from '@/widgets/session-spods';
+import { StartSessionButton, StartSessionSheet } from '@/features/start-session';
+import { SessionHeader, SessionRods } from '@/widgets/session';
 
 export const MainScreen = () => {
-  const { t } = useTranslation();
-  const [biteRodId, setBiteRodId] = useState<string | null>(null);
-  const activeSession = useSessionStore((state) => state.activeSession);
-  const rods = useRodStore((state) => state.rods);
-  const resetRodTimer = useRodStore((state) => state.resetRodTimer);
-  const addFishBiteResult = useFishingResultStore((state) => state.addFishBiteResult);
-  const openAddRodSheet = useAddRodStore((state) => state.openSheet);
-  const openStartSessionSheet = useStartSessionStore((state) => state.openSheet);
-  const hasActiveSession = activeSession !== null;
-  const biteRod = rods.find((rod) => rod.id === biteRodId);
-
-  const handleBiteSubmit = (data: IFishBiteData) => {
-    if (!activeSession || !biteRod) return;
-
-    const occurredAt = Date.now();
-
-    addFishBiteResult({
-      ...data,
-      rodId: biteRod.id,
-      rodNumber: rods.indexOf(biteRod) + 1,
-      bait: biteRod.bait,
-      timeInWaterMinutes: getTimeInWaterMinutes(biteRod.castAt, occurredAt),
-      distance: calculateRodDistance(biteRod.wraps, biteRod.pegDistance),
-      sector: activeSession.sector,
-      venue: activeSession.venue,
-      occurredAt,
-    });
-    resetRodTimer(biteRod.id, occurredAt);
-  };
+  const hasActiveSession = useHasActiveSession();
 
   return (
     <View style={styles.container}>
       <SessionHeader />
-      {hasActiveSession && (
-        <RodCards
-          footer={<SessionSpods />}
-          onAdd={() => openAddRodSheet()}
-          onBite={setBiteRodId}
-          onEdit={openAddRodSheet}
-        />
-      )}
+      {hasActiveSession && <SessionRods />}
       {!hasActiveSession && (
         <View style={styles.startButtonContainer}>
-          <Button onPress={openStartSessionSheet}>{t('session.start')}</Button>
+          <StartSessionButton />
         </View>
       )}
       <StartSessionSheet />
       <AddRodSheet />
       <AddSpodSheet />
-      {biteRod ? <FishBiteSheet open onClose={() => setBiteRodId(null)} onSubmit={handleBiteSubmit} /> : null}
+      <FishBiteSheet />
     </View>
   );
 };

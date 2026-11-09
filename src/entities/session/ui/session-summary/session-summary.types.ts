@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export interface ISessionSummaryProps {
-  onFinish: () => void;
+  actions?: ReactNode;
 }

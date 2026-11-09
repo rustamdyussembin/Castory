@@ -1,10 +1,11 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
-import type { FishingResultsState } from '../fishing-result.types';
+import { createPersistStorage } from '@/shared/lib/storage';
 
-export const useFishingResultsStore = create<FishingResultsState>()(
+import type { IFishingResultsState } from '../fishing-result.types';
+
+export const useFishingResultsStore = create<IFishingResultsState>()(
   persist(
     (set) => ({
       sessions: [],
@@ -15,7 +16,7 @@ export const useFishingResultsStore = create<FishingResultsState>()(
     }),
     {
       name: 'fishing-results',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createPersistStorage(),
       partialize: ({ sessions }) => ({ sessions }),
     },
   ),

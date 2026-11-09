@@ -1,14 +1,9 @@
-import { create } from 'zustand';
-import { IStartSessionState } from '../start-session.types';
+import { useRodStore } from '@/entities/rod';
+import { type IStartSessionData, useSessionStore } from '@/entities/session';
+import { useSpodStore } from '@/entities/spod';
 
-export const useStartSessionStore = create<IStartSessionState>()((set) => ({
-  isSheetOpen: false,
-
-  openSheet: () => {
-    set({ isSheetOpen: true });
-  },
-
-  closeSheet: () => {
-    set({ isSheetOpen: false });
-  },
-}));
+export const startNewSession = (data: IStartSessionData): void => {
+  useRodStore.getState().clearRods();
+  useSpodStore.getState().clearSpods();
+  useSessionStore.getState().startSession(data);
+};

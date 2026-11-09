@@ -4,16 +4,17 @@ import { useTranslation } from 'react-i18next';
 
 import {
   getSortedPreparationTasks,
-  type PreparationTask,
+  type IPreparationTask,
   PreparationTaskItem,
   usePreparationStore,
 } from '@/entities/preparation-task';
 import { AddPreparationTask } from '@/features/add-preparation-task';
+import { RemovePreparationTaskMenu } from '@/features/remove-preparation-task';
 import { spacing } from '@/shared/theme';
 import { Text } from '@/shared/ui';
 
-interface PreparationSection {
-  data: PreparationTask[];
+interface IPreparationSection {
+  data: IPreparationTask[];
   title?: string;
 }
 
@@ -23,9 +24,8 @@ export const PreparationScreen = () => {
   const { t } = useTranslation();
   const tasks = usePreparationStore((state) => state.tasks);
   const toggleTask = usePreparationStore((state) => state.toggleTask);
-  const removeTask = usePreparationStore((state) => state.removeTask);
   const { activeTasks, completedTasks } = useMemo(() => getSortedPreparationTasks(tasks), [tasks]);
-  const sections: PreparationSection[] = [
+  const sections: IPreparationSection[] = [
     { data: activeTasks },
     ...(completedTasks.length > 0 ? [{ data: completedTasks, title: t('preparation.completed') }] : []),
   ];
@@ -37,11 +37,15 @@ export const PreparationScreen = () => {
       </Text>
       <AddPreparationTask />
 
-      <SectionList<PreparationTask, PreparationSection>
+      <SectionList<IPreparationTask, IPreparationSection>
         sections={sections}
         keyExtractor={(task) => task.id}
         renderItem={({ item }) => (
-          <PreparationTaskItem task={item} onToggle={() => toggleTask(item.id)} onRemove={() => removeTask(item.id)} />
+          <PreparationTaskItem
+            actions={<RemovePreparationTaskMenu task={item} />}
+            task={item}
+            onToggle={() => toggleTask(item.id)}
+          />
         )}
         renderSectionHeader={({ section }) =>
           section.title ? <Text style={styles.sectionTitle}>{section.title}</Text> : null

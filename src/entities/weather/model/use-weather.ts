@@ -22,11 +22,5 @@ export const useWeather = (): IUseWeather => {
   return {
     weather: query.data ?? null,
     isLoading: query.isPending,
-    isRefreshing: query.isFetching && query.data !== undefined,
-    error: query.error,
-    updatedAt: query.dataUpdatedAt === 0 ? null : new Date(query.dataUpdatedAt),
-    refetch: async () => {
-      await query.refetch();
-    },
   };
 };

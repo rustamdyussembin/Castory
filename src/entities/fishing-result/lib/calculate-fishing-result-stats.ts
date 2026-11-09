@@ -1,4 +1,4 @@
-import { IFishingResult, IFishingResultStats } from '@/shared/types';
+import { IFishingResult, IFishingResultStats } from '../fishing-result.types';
 
 export const calculateFishingResultStats = ({ result }: IFishingResult): IFishingResultStats => {
   if (result.length === 0) {

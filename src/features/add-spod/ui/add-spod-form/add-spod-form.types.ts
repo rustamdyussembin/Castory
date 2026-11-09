@@ -1,9 +1,9 @@
 import type { SubmitHandler } from 'react-hook-form';
 
-import type { Spod, SpodFormData } from '@/entities/spod';
+import type { ISpodInput } from '@/entities/spod';
 
 export interface IAddSpodFormProps {
-  initialValues?: Pick<Spod, 'pegDistance' | 'wraps'>;
+  initialValues?: ISpodInput;
   onCancel: () => void;
-  onSubmit: SubmitHandler<SpodFormData>;
+  onSubmit: SubmitHandler<ISpodInput>;
 }

@@ -1,25 +1,19 @@
-import { type FC, useState } from 'react';
+import type { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Checkbox, IconButton, Menu } from 'react-native-paper';
 
 import { spacing, useThemeColors } from '@/shared/theme';
+import { Checkbox } from '@/shared/ui';
 
 import type { IPreparationTaskItemProps } from './preparation-task-item.types';
 
-export const PreparationTaskItem: FC<IPreparationTaskItemProps> = ({ onRemove, onToggle, task }) => {
+export const PreparationTaskItem: FC<IPreparationTaskItemProps> = ({ actions, onToggle, task }) => {
   const { t } = useTranslation();
   const colors = useThemeColors();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleAccessibilityLabel = task.isCompleted
     ? t('preparation.markActive', { title: task.title })
     : t('preparation.markCompleted', { title: task.title });
-
-  const handleRemove = () => {
-    setIsMenuOpen(false);
-    onRemove();
-  };
 
   return (
     <View
@@ -42,25 +36,7 @@ export const PreparationTaskItem: FC<IPreparationTaskItemProps> = ({ onRemove, o
           labelStyle={[styles.taskTitle, task.isCompleted && styles.completedTitle]}
         />
       </View>
-      <Menu
-        visible={isMenuOpen}
-        onDismiss={() => setIsMenuOpen(false)}
-        anchor={
-          <IconButton
-            icon="dots-vertical"
-            onPress={() => setIsMenuOpen(true)}
-            accessibilityLabel={t('preparation.taskActions', { title: task.title })}
-            style={styles.menuButton}
-          />
-        }
-      >
-        <Menu.Item
-          leadingIcon="delete-outline"
-          onPress={handleRemove}
-          title={t('common.delete')}
-          titleStyle={{ color: colors.error }}
-        />
-      </Menu>
+      {actions}
     </View>
   );
 };
@@ -81,9 +57,6 @@ const styles = StyleSheet.create({
   },
   completedTitle: {
     textDecorationLine: 'line-through',
-  },
-  menuButton: {
-    margin: 0,
   },
   taskTitle: {
     textAlign: 'left',

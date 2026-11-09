@@ -1,7 +1,9 @@
-import type { PreparationTask } from '../../preparation-task.types';
+import type { ReactNode } from 'react';
+
+import type { IPreparationTask } from '../../preparation-task.types';
 
 export interface IPreparationTaskItemProps {
-  task: PreparationTask;
-  onRemove: () => void;
+  actions?: ReactNode;
+  task: IPreparationTask;
   onToggle: () => void;
 }

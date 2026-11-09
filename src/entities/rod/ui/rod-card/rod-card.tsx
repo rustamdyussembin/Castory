@@ -1,36 +1,24 @@
-import { type FC, useEffect, useState } from 'react';
-import { AppState, StyleSheet, View } from 'react-native';
+import type { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { IconButton } from 'react-native-paper';
 
 import { spacing, useThemeColors } from '@/shared/theme';
-import { Button, Text } from '@/shared/ui';
+import { Text } from '@/shared/ui';
 
-import { calculateRodDistance } from '../../lib/calculate-rod-distance';
 import { getTimeInWaterMinutes } from '../../lib/get-time-in-water-minutes';
 import type { IRodCardProps } from './rod-card.types';
+import { calculateDistance } from '@/shared/lib/distance';
+import { useNow } from '@/shared/lib/use-now';
 
 const TIMER_UPDATE_INTERVAL_MS = 60_000;
 
-export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag, onEdit, onRecast, rod }) => {
+export const RodCard: FC<IRodCardProps> = ({ actions, headerAction, isDragging = false, number, rod }) => {
   const { t } = useTranslation();
   const colors = useThemeColors();
-  const [now, setNow] = useState(Date.now);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => setNow(Date.now()), TIMER_UPDATE_INTERVAL_MS);
-    const subscription = AppState.addEventListener('change', (status) => {
-      if (status === 'active') setNow(Date.now());
-    });
-
-    return () => {
-      clearInterval(intervalId);
-      subscription.remove();
-    };
-  }, []);
+  const now = useNow(TIMER_UPDATE_INTERVAL_MS);
 
   const wraps = rod.wraps;
-  const distance = calculateRodDistance(wraps, rod.pegDistance);
+  const distance = calculateDistance(wraps, rod.pegDistance);
   const timeInWaterMinutes = getTimeInWaterMinutes(rod.castAt, now);
   const timeInWater =
     timeInWaterMinutes >= 60
@@ -52,15 +40,7 @@ export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag,
         <View style={[styles.titleBadge, { backgroundColor: colors.primary }]}>
           <Text style={[styles.title, { color: colors.onPrimary }]}>{t('rod.title', { number })}</Text>
         </View>
-        <IconButton
-          accessibilityLabel={t('rod.card.reorder', { number })}
-          disabled={isDragging}
-          icon="drag-vertical"
-          iconColor={colors.textSecondary}
-          onPressIn={onDrag}
-          size={24}
-          style={styles.dragHandle}
-        />
+        {headerAction}
       </View>
       <Text variant="bodyS">{t('rod.card.bait', { bait: rod.bait })}</Text>
       <Text variant="bodyS">{timeInWater}</Text>
@@ -69,19 +49,7 @@ export const RodCard: FC<IRodCardProps> = ({ isDragging, number, onBite, onDrag,
           ? t('rod.card.distanceUnavailable')
           : t('rod.card.distance', { distance, wraps })}
       </Text>
-
-      <View style={styles.primaryActions}>
-        <Button onPress={onBite} style={styles.action}>
-          {t('fishBite.title')}
-        </Button>
-        <Button mode="contained-tonal" onPress={onRecast} style={styles.action}>
-          {t('rod.card.recast')}
-        </Button>
-      </View>
-
-      <Button mode="outlined" onPress={onEdit} style={styles.editAction}>
-        {t('common.edit')}
-      </Button>
+      {actions}
     </View>
   );
 };
@@ -104,9 +72,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  dragHandle: {
-    margin: 0,
-  },
   titleBadge: {
     borderRadius: 999,
     paddingHorizontal: spacing[3],
@@ -114,18 +79,5 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: '700',
-  },
-  primaryActions: {
-    flexDirection: 'row',
-    gap: spacing[3],
-    marginTop: spacing[3],
-  },
-  action: {
-    flex: 1,
-  },
-  editAction: {
-    alignSelf: 'flex-start',
-    marginTop: spacing[2],
-    minWidth: 180,
   },
 });

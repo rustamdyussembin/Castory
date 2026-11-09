@@ -1,9 +1,9 @@
 import * as Location from 'expo-location';
 
 import { LocationPermissionError } from './location.errors';
-import type { Coordinates } from './location.types';
+import type { ICoordinates } from './location.types';
 
-export const getCurrentCoordinates = async (): Promise<Coordinates> => {
+export const getCurrentCoordinates = async (): Promise<ICoordinates> => {
   const permission = await Location.requestForegroundPermissionsAsync();
 
   if (permission.status !== Location.PermissionStatus.GRANTED) {
