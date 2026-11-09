@@ -4,3 +4,5 @@ export { Modal } from './modal';
 export { Text } from './text';
 export { TextInput } from './text-input';
 export { Screen } from './screen';
+export { Select } from './select';
+export type { ISelectOption } from './select';
