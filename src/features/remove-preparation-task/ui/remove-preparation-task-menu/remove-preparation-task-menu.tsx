@@ -1,11 +1,10 @@
 import { type FC, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Menu } from 'react-native-paper';
 
 import { usePreparationStore } from '@/entities/preparation-task';
 import { useThemeColors } from '@/shared/theme';
-import { IconButton } from '@/shared/ui';
+import { IconButton, Menu } from '@/shared/ui';
 
 import type { IRemovePreparationTaskMenuProps } from './remove-preparation-task-menu.types';
 

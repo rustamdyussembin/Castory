@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Checkbox } from 'react-native-paper';
 
 import { spacing, useThemeColors } from '@/shared/theme';
+import { Checkbox } from '@/shared/ui';
 
 import type { IPreparationTaskItemProps } from './preparation-task-item.types';
 
