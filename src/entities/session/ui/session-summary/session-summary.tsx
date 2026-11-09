@@ -1,7 +1,8 @@
-import { type FC, useEffect, useState } from 'react';
-import { AppState, StyleSheet, View } from 'react-native';
+import type { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { useNow } from '@/shared/lib/use-now';
 import { spacing } from '@/shared/theme';
 import { Text } from '@/shared/ui';
 
@@ -13,19 +14,7 @@ import { SESSION_SUMMARY_UPDATE_INTERVAL_MS } from '../../session.constants';
 export const SessionSummary: FC<ISessionSummaryProps> = ({ actions }) => {
   const { t } = useTranslation();
   const activeSession = useSessionStore((state) => state.activeSession);
-  const [now, setNow] = useState(Date.now);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => setNow(Date.now()), SESSION_SUMMARY_UPDATE_INTERVAL_MS);
-    const subscription = AppState.addEventListener('change', (status) => {
-      if (status === 'active') setNow(Date.now());
-    });
-
-    return () => {
-      clearInterval(intervalId);
-      subscription.remove();
-    };
-  }, []);
+  const now = useNow(SESSION_SUMMARY_UPDATE_INTERVAL_MS);
 
   if (!activeSession) return null;
 

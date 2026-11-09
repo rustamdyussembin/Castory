@@ -1,5 +1,5 @@
-import { type FC, useEffect, useState } from 'react';
-import { AppState, StyleSheet, View } from 'react-native';
+import type { FC } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { spacing, useThemeColors } from '@/shared/theme';
@@ -8,25 +8,14 @@ import { Text } from '@/shared/ui';
 import { getTimeInWaterMinutes } from '../../lib/get-time-in-water-minutes';
 import type { IRodCardProps } from './rod-card.types';
 import { calculateDistance } from '@/shared/lib/distance';
+import { useNow } from '@/shared/lib/use-now';
 
 const TIMER_UPDATE_INTERVAL_MS = 60_000;
 
 export const RodCard: FC<IRodCardProps> = ({ actions, headerAction, isDragging = false, number, rod }) => {
   const { t } = useTranslation();
   const colors = useThemeColors();
-  const [now, setNow] = useState(Date.now);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => setNow(Date.now()), TIMER_UPDATE_INTERVAL_MS);
-    const subscription = AppState.addEventListener('change', (status) => {
-      if (status === 'active') setNow(Date.now());
-    });
-
-    return () => {
-      clearInterval(intervalId);
-      subscription.remove();
-    };
-  }, []);
+  const now = useNow(TIMER_UPDATE_INTERVAL_MS);
 
   const wraps = rod.wraps;
   const distance = calculateDistance(wraps, rod.pegDistance);
