@@ -1,5 +1,6 @@
 export { Button } from './button';
 export { BottomSheet } from './bottom-sheet';
+export { IconButton } from './icon-button';
 export { Modal } from './modal';
 export { Text } from './text';
 export { TextInput } from './text-input';

@@ -2,13 +2,13 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import DraggableFlatList, { type RenderItemParams } from 'react-native-draggable-flatlist';
-import { IconButton } from 'react-native-paper';
 
 import { type IRod, RodCard, useRodStore } from '@/entities/rod';
 import { AddRodButton, EditRodButton } from '@/features/add-rod';
 import { FishBiteButton } from '@/features/fish-bite';
 import { RecastRodButton } from '@/features/recast-rod';
 import { spacing, useThemeColors } from '@/shared/theme';
+import { IconButton } from '@/shared/ui';
 
 import { SessionSpods } from '../session-spods/session-spods';
 
