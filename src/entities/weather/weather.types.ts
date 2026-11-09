@@ -15,10 +15,6 @@ export interface IWeather {
 export interface IUseWeather {
   weather: IWeather | null;
   isLoading: boolean;
-  isRefreshing: boolean;
-  error: Error | null;
-  updatedAt: Date | null;
-  refetch: () => Promise<void>;
 }
 
 export type WindDirection = (typeof WIND_DIRECTIONS)[number];

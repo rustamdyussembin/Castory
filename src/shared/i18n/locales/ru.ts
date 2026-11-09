@@ -8,7 +8,6 @@ export const ru = {
     save: 'Сохранить',
   },
   navigation: {
-    explore: 'Обзор',
     preparation: 'Подготовка',
     session: 'Сессия',
   },

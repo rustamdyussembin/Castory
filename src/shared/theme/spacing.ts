@@ -1,5 +1,3 @@
-import { Platform } from 'react-native';
-
 export const spacing = {
   1: 2,
   2: 4,
@@ -9,6 +7,3 @@ export const spacing = {
   6: 32,
   7: 64,
 } as const;
-
-export const bottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
-export const maxContentWidth = 800;

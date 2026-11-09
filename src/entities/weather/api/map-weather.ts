@@ -8,7 +8,7 @@ import { toWeatherSnapshot } from './weather.translators';
 const isWeatherApiSnapshot = (value: unknown): value is IWeatherApiSnapshot =>
   isRecord(value) && WEATHER_API_FIELDS.every((field) => typeof value[field] === 'number');
 
-export const getHourlySnapshot = (hourly: IWeatherHourlyData, index: number): IWeatherApiSnapshot => {
+const getHourlySnapshot = (hourly: IWeatherHourlyData, index: number): IWeatherApiSnapshot => {
   const snapshot = {
     temperature_2m: hourly.temperature_2m[index],
     wind_speed_10m: hourly.wind_speed_10m[index],
@@ -23,7 +23,7 @@ export const getHourlySnapshot = (hourly: IWeatherHourlyData, index: number): IW
   return snapshot;
 };
 
-export const getClosestTimeIndex = (isoTimes: string[], targetTime: number): number => {
+const getClosestTimeIndex = (isoTimes: string[], targetTime: number): number => {
   if (isoTimes.length === 0) {
     throw new Error('Cannot find the closest time in an empty collection');
   }
