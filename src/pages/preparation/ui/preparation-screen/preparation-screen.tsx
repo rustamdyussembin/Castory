@@ -9,6 +9,7 @@ import {
   usePreparationStore,
 } from '@/entities/preparation-task';
 import { AddPreparationTask } from '@/features/add-preparation-task';
+import { RemovePreparationTaskMenu } from '@/features/remove-preparation-task';
 import { spacing } from '@/shared/theme';
 import { Text } from '@/shared/ui';
 
@@ -23,7 +24,6 @@ export const PreparationScreen = () => {
   const { t } = useTranslation();
   const tasks = usePreparationStore((state) => state.tasks);
   const toggleTask = usePreparationStore((state) => state.toggleTask);
-  const removeTask = usePreparationStore((state) => state.removeTask);
   const { activeTasks, completedTasks } = useMemo(() => getSortedPreparationTasks(tasks), [tasks]);
   const sections: IPreparationSection[] = [
     { data: activeTasks },
@@ -41,7 +41,11 @@ export const PreparationScreen = () => {
         sections={sections}
         keyExtractor={(task) => task.id}
         renderItem={({ item }) => (
-          <PreparationTaskItem task={item} onToggle={() => toggleTask(item.id)} onRemove={() => removeTask(item.id)} />
+          <PreparationTaskItem
+            actions={<RemovePreparationTaskMenu task={item} />}
+            task={item}
+            onToggle={() => toggleTask(item.id)}
+          />
         )}
         renderSectionHeader={({ section }) =>
           section.title ? <Text style={styles.sectionTitle}>{section.title}</Text> : null

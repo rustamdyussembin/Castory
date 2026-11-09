@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { spacing, useThemeColors } from '@/shared/theme';
-import { Button, Text } from '@/shared/ui';
+import { Text } from '@/shared/ui';
 
 import type { ISpodCardProps } from './spod-card.types';
 import { calculateDistance } from '@/shared/lib/distance';
 
-export const SpodCard: FC<ISpodCardProps> = ({ number, onEdit, spod }) => {
+export const SpodCard: FC<ISpodCardProps> = ({ actions, number, spod }) => {
   const { t } = useTranslation();
   const colors = useThemeColors();
   const distance = calculateDistance(spod.wraps, spod.pegDistance);
@@ -21,9 +21,7 @@ export const SpodCard: FC<ISpodCardProps> = ({ number, onEdit, spod }) => {
 
       {distance && <Text variant="bodyS">{t('spod.card.distance', { distance: distance, wraps: spod.wraps })}</Text>}
 
-      <Button mode="outlined" onPress={onEdit} style={styles.editAction}>
-        {t('common.edit')}
-      </Button>
+      {actions}
     </View>
   );
 };
@@ -42,9 +40,5 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: '700',
-  },
-  editAction: {
-    marginTop: spacing[2],
-    minWidth: 180,
   },
 });

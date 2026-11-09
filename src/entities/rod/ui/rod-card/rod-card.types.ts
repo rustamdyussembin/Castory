@@ -1,11 +1,11 @@
+import type { ReactNode } from 'react';
+
 import type { IRod } from '../../rod.types';
 
 export interface IRodCardProps {
-  isDragging: boolean;
+  actions?: ReactNode;
+  headerAction?: ReactNode;
+  isDragging?: boolean;
   number: number;
   rod: IRod;
-  onBite: () => void;
-  onDrag: () => void;
-  onEdit: () => void;
-  onRecast: () => void;
 }
