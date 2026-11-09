@@ -6,18 +6,13 @@ export interface IRod {
   castAt: number;
 }
 
-export interface IRodFormData {
-  bait: string;
-  wraps?: number;
-  pegDistance: number;
-}
-
-export type IAddRodData = IRodFormData;
+/** Data to create or update a rod: everything except the generated `id` and the cast time. */
+export type IRodInput = Pick<IRod, 'bait' | 'pegDistance' | 'wraps'>;
 
 export interface IRodState {
   rods: IRod[];
-  addRod: (data: IAddRodData) => void;
-  updateRod: (id: string, data: IRodFormData) => void;
+  addRod: (data: IRodInput) => void;
+  updateRod: (id: string, data: IRodInput) => void;
   resetRodTimer: (id: string, castAt?: number) => void;
   reorderRods: (fromIndex: number, toIndex: number) => void;
   clearRods: () => void;

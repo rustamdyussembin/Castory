@@ -1,9 +1,9 @@
 import type { SubmitHandler } from 'react-hook-form';
 
-import type { IAddRodData, IRod } from '@/entities/rod';
+import type { IRodInput } from '@/entities/rod';
 
 export interface IAddRodFormProps {
-  initialValues?: Pick<IRod, 'bait' | 'pegDistance' | 'wraps'>;
+  initialValues?: IRodInput;
   onCancel: () => void;
-  onSubmit: SubmitHandler<IAddRodData>;
+  onSubmit: SubmitHandler<IRodInput>;
 }

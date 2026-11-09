@@ -4,7 +4,7 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
-import type { IAddRodData } from '@/entities/rod';
+import type { IRodInput } from '@/entities/rod';
 import { spacing } from '@/shared/theme';
 import { Button, type ISelectOption, Select, Text, TextInput } from '@/shared/ui';
 
@@ -21,7 +21,7 @@ export const AddRodForm: FC<IAddRodFormProps> = ({ initialValues, onCancel, onSu
     value,
   }));
   const schema = useMemo(() => createAddRodFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<AddRodFormInput, unknown, IAddRodData>({
+  const { control, handleSubmit } = useForm<AddRodFormInput, unknown, IRodInput>({
     resolver: zodResolver(schema),
     defaultValues: {
       bait: initialValues?.bait ?? '',

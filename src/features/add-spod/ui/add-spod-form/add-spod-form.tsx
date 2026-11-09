@@ -4,7 +4,7 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
-import type { ISpodFormData } from '@/entities/spod';
+import type { ISpodInput } from '@/entities/spod';
 import { spacing } from '@/shared/theme';
 import { Button, type ISelectOption, Select, Text, TextInput } from '@/shared/ui';
 
@@ -21,7 +21,7 @@ export const AddSpodForm: FC<IAddSpodFormProps> = ({ initialValues, onCancel, on
     value,
   }));
   const schema = useMemo(() => createAddSpodFormSchema(t), [t]);
-  const { control, handleSubmit } = useForm<AddSpodFormInput, unknown, ISpodFormData>({
+  const { control, handleSubmit } = useForm<AddSpodFormInput, unknown, ISpodInput>({
     resolver: zodResolver(schema),
     defaultValues: {
       wraps: initialValues ? String(initialValues.wraps) : '',

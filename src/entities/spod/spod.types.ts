@@ -4,11 +4,12 @@ export interface ISpod {
   pegDistance: number;
 }
 
-export type ISpodFormData = Pick<ISpod, 'pegDistance' | 'wraps'>;
+/** Data to create or update a spod: everything except the generated `id`. */
+export type ISpodInput = Pick<ISpod, 'pegDistance' | 'wraps'>;
 
 export interface ISpodState {
   spods: ISpod[];
-  addSpod: (data: ISpodFormData) => void;
-  updateSpod: (id: string, data: ISpodFormData) => void;
+  addSpod: (data: ISpodInput) => void;
+  updateSpod: (id: string, data: ISpodInput) => void;
   clearSpods: () => void;
 }
