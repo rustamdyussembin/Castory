@@ -19,6 +19,8 @@
 - Slice-wide types and constants live in the slice root as `<slice>.types.ts` and `<slice>.constants.ts`
   (e.g. `entities/rod/rod.types.ts`), next to `index.ts`. Do not move them into `model/` or `config/`.
 - API-specific code (DTO types, endpoint constants, response parsing and mapping) lives in the `api/` segment.
+- Expo Router routes live in `src/routes` (configured via the `root` option of the `expo-router` plugin in `app.json`).
+  Route files stay thin: they only compose pages and `@/app`. Providers and initialization belong to the FSD `src/app` layer.
 
 ## UI structure
 Each UI component lives in its own directory.
