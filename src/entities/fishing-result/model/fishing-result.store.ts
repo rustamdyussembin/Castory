@@ -1,6 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+
+import { createPersistStorage } from '@/shared/lib/storage';
 
 import { formatBiteDateTime } from '../lib/format-bite-date-time';
 import type { IFishingResultState } from '../fishing-result.types';
@@ -35,7 +36,7 @@ export const useFishingResultStore = create<IFishingResultState>()(
     }),
     {
       name: 'fishing-result',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createPersistStorage(),
       partialize: ({ fishingResult }) => ({ fishingResult }),
     },
   ),

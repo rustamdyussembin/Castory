@@ -1,6 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+
+import { createPersistStorage } from '@/shared/lib/storage';
 
 import type { ISessionState } from '../session.types';
 import { isActiveSession } from '../lib/is-active-session';
@@ -26,7 +27,7 @@ export const useSessionStore = create<ISessionState>()(
     }),
     {
       name: 'active-session',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createPersistStorage(),
       partialize: ({ activeSession }) => ({ activeSession }),
       merge: (persistedState, currentState) => {
         if (

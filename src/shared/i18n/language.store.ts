@@ -1,7 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLocales } from 'expo-localization';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+
+import { createPersistStorage } from '@/shared/lib/storage';
 
 import { type ILanguageState, isSupportedLanguage } from './i18n.types';
 import { resolveDeviceLanguage } from './resolve-device-language';
@@ -17,7 +18,7 @@ export const useLanguageStore = create<ILanguageState>()(
     {
       // The storage key is kept from the former `entities/settings` store to preserve the persisted language.
       name: 'settings',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createPersistStorage(),
       partialize: ({ language }) => ({ language }),
       merge: (persistedState, currentState) => {
         if (

@@ -1,6 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+
+import { createPersistStorage } from '@/shared/lib/storage';
 
 import { MAX_RODS } from '../rod.constants';
 import type { IRodState } from '../rod.types';
@@ -57,7 +58,7 @@ export const useRodStore = create<IRodState>()(
     }),
     {
       name: 'session-rods',
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createPersistStorage(),
       partialize: ({ rods }) => ({ rods }),
       version: 1,
       migrate: (persistedState, version) => {
