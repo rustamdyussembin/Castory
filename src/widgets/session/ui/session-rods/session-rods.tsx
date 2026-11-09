@@ -1,4 +1,4 @@
-import { type FC, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import DraggableFlatList, { type RenderItemParams } from 'react-native-draggable-flatlist';
@@ -10,11 +10,11 @@ import { FishBiteButton } from '@/features/fish-bite';
 import { RecastRodButton } from '@/features/recast-rod';
 import { spacing, useThemeColors } from '@/shared/theme';
 
-import type { ISessionRodsProps } from './session-rods.types';
+import { SessionSpods } from '../session-spods/session-spods';
 
 const RodSeparator = () => <View style={styles.separator} />;
 
-export const SessionRods: FC<ISessionRodsProps> = ({ footer }) => {
+export const SessionRods = () => {
   const { t } = useTranslation();
   const colors = useThemeColors();
   const rods = useRodStore((state) => state.rods);
@@ -66,7 +66,7 @@ export const SessionRods: FC<ISessionRodsProps> = ({ footer }) => {
       ListFooterComponent={
         <View style={styles.footer}>
           <AddRodButton />
-          {footer}
+          <SessionSpods />
         </View>
       }
       onDragEnd={({ from, to }) => reorderRods(from, to)}

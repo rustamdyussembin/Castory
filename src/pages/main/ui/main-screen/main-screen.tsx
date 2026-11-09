@@ -5,9 +5,7 @@ import { AddRodSheet } from '@/features/add-rod';
 import { AddSpodSheet } from '@/features/add-spod';
 import { FishBiteSheet } from '@/features/fish-bite';
 import { StartSessionButton, StartSessionSheet } from '@/features/start-session';
-import { SessionHeader } from '@/widgets/session-header';
-import { SessionRods } from '@/widgets/session-rods';
-import { SessionSpods } from '@/widgets/session-spods';
+import { SessionHeader, SessionRods } from '@/widgets/session';
 
 export const MainScreen = () => {
   const hasActiveSession = useHasActiveSession();
@@ -15,7 +13,7 @@ export const MainScreen = () => {
   return (
     <View style={styles.container}>
       <SessionHeader />
-      {hasActiveSession && <SessionRods footer={<SessionSpods />} />}
+      {hasActiveSession && <SessionRods />}
       {!hasActiveSession && (
         <View style={styles.startButtonContainer}>
           <StartSessionButton />
